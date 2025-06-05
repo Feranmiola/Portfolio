@@ -1,7 +1,9 @@
+import Topbar from "@/Components/Topbar";
+
 export default function Home() {
   return (
-    <div>
-      <div></div>
+    <div className="bg-[#010010] flex flex-col w-full min-h-screen">
+      <Topbar />
     </div>
   );
 }
