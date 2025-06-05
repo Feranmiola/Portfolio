@@ -71,7 +71,7 @@ html {
   }
 
   body::after {
-    background: #909090;
+    background: #ffffff;
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
   }
