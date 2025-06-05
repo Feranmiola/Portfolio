@@ -44,7 +44,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-[#010010] flex flex-col w-full min-h-screen">
+    <div className="bg-[#020126] flex flex-col w-full min-h-screen">
       <Topbar />
       <Hero />
     </div>
