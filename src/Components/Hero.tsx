@@ -1,4 +1,5 @@
 import React from "react";
+import BeamLight from "./Icons/BeamLight";
 
 const Hero = () => {
   return (
@@ -12,6 +13,10 @@ const Hero = () => {
         elegant interfaces with secure, efficient blockchain <br />
         logic.
       </p>
+
+      <div className="absolute left-0 top-[23rem]">
+        <BeamLight />
+      </div>
     </div>
   );
 };
