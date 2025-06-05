@@ -34,3 +34,54 @@ body {
     text-wrap: balance;
   }
 }
+
+
+html {
+  @apply scroll-smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+
+@media screen and (min-width: 1024px) {
+
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    position: relative;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: transparent;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  body::after {
+    background: #909090;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  body.is-scrolling::after {
+    opacity: 1;
+  }
+
+  body::after {
+    top: var(--scroll-top, 0px);
+    height: var(--scrollbar-height, 20%);
+  }
+}
