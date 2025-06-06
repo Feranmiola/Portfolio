@@ -1,5 +1,6 @@
 "use client";
 import Hero from "@/Components/Hero";
+import Hero2 from "@/Components/Hero2";
 import Projects from "@/Components/Projects";
 import Topbar from "@/Components/Topbar";
 import { useEffect } from "react";
@@ -49,6 +50,7 @@ export default function Home() {
       <Topbar />
       <Hero />
       <Projects />
+      <Hero2 />
     </div>
   );
 }

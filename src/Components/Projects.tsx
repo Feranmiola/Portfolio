@@ -6,7 +6,7 @@ import NextJsIcon from "./Icons/NextJsIcon";
 
 const Projects = () => {
   return (
-    <div className="flex items-center justify-center pt-[30rem]">
+    <div className="flex items-center justify-center pt-[30rem] pb-[15rem]">
       <div className="flex flex-col w-[1240px] space-y-10">
         <div className="flex flex-row w-full justify-between items-start">
           <p className="font-merriweather text-[40px] text-white">
