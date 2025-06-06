@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/Components/Footer";
 import Hero from "@/Components/Hero";
 import Hero2 from "@/Components/Hero2";
 import Projects from "@/Components/Projects";
@@ -51,6 +52,7 @@ export default function Home() {
       <Hero />
       <Projects />
       <Hero2 />
+      <Footer />
     </div>
   );
 }
