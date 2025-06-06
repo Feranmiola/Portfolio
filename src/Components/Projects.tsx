@@ -1,5 +1,7 @@
 import React from "react";
 import ArrowRight from "./Icons/ArrowRight";
+import Viteicon from "./Icons/Viteicon";
+import Paypalicon from "./Icons/Paypalicon";
 
 const Projects = () => {
   return (
@@ -43,9 +45,10 @@ const Projects = () => {
                 <p className="font-merriweather text-white text-[20px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
                   Technologies used
                 </p>
-                <p className="font-merriweather text-white text-[20px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
-                  Technologies used
-                </p>
+                <div className="flex flex-row items-center space-x-4">
+                  <Viteicon />
+                  <Paypalicon />
+                </div>
               </div>
 
               <div className="flex flex-row items-center space-x-5  ">
