@@ -1,5 +1,6 @@
 "use client";
 import Hero from "@/Components/Hero";
+import Projects from "@/Components/Projects";
 import Topbar from "@/Components/Topbar";
 import { useEffect } from "react";
 
@@ -47,6 +48,7 @@ export default function Home() {
     <div className="bg-[#020126] flex flex-col w-full min-h-screen">
       <Topbar />
       <Hero />
+      <Projects />
     </div>
   );
 }
