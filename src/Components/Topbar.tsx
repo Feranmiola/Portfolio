@@ -19,7 +19,7 @@ const Topbar = () => {
 
   useEffect(() => {
     const unsubscribe = scrollY.onChange((latest) => {
-      setIsScrolled(latest > 200);
+      setIsScrolled(latest > 500);
     });
 
     return () => unsubscribe();
@@ -40,7 +40,7 @@ const Topbar = () => {
         </motion.p>
 
         <motion.p
-          className="absolute left-0 text-white text-[34px] font-bold font-merriweather whitespace-nowrap"
+          className="absolute left-0 bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent text-[34px] font-bold font-merriweather whitespace-nowrap"
           style={{
             y: initialsY,
             opacity: initialsOpacity,
