@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight as LucideArrowRight } from "lucide-react";
-import BeamLight from "./Icons/BeamLight";
+import LightRay from "./Icons/LightRay";
 import WhatsappIcon from "./Icons/WhatsappIcon";
 import LinkedinIcon from "./Icons/LinkedinIcon";
 import Xicon from "./Icons/Xicon";
@@ -89,7 +89,7 @@ const Hero = () => {
       </p>
 
       <div className="absolute left-0 top-[16rem]">
-        <BeamLight />
+        <LightRay />
       </div>
 
       <div className="flex flex-col absolute space-y-3 top-[55rem] left-[10rem]">
