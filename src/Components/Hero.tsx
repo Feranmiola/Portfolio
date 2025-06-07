@@ -117,15 +117,20 @@ logic.`;
         <LightRay />
       </div>
 
-      <div className="flex flex-col absolute space-y-3 top-[55rem] left-[10rem]">
+      <motion.div
+        className="flex flex-col absolute space-y-3 top-[55rem] left-[10rem]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+      >
         <p className="text-2xl font-merriweather">
           Frontend Development / Smart Contract Engineering / End-to-End
           Integration
         </p>
-        <p className="text-[#ADAAAA] -skew-x-[5deg] text-[128px] font-merriweather leading-none">
+        <p className="-skew-x-[5deg] text-[128px] font-merriweather leading-none bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent">
           I'm <span className="font-bold">Feranmi Ola</span>
         </p>
-      </div>
+      </motion.div>
 
       <AnimatePresence mode="wait">
         {isContactOpen ? (
