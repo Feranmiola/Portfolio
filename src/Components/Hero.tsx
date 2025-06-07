@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LucideArrowLeft, ArrowRight as LucideArrowRight } from "lucide-react";
 import LightRay from "./Icons/LightRay";
@@ -7,6 +7,14 @@ import WhatsappIcon from "./Icons/WhatsappIcon";
 import LinkedinIcon from "./Icons/LinkedinIcon";
 import Xicon from "./Icons/Xicon";
 import Mailicon from "./Icons/Mailicon";
+
+const MemoizedLightRay = memo(() => (
+  <div className="absolute left-0 top-[16rem] z-20">
+    <LightRay />
+  </div>
+));
+
+MemoizedLightRay.displayName = "MemoizedLightRay";
 
 const TypingText = React.memo(() => {
   const [displayText, setDisplayText] = useState("");
@@ -55,9 +63,7 @@ const Hero = () => {
     <div className="flex items-center justify-center relative min-h-screen w-full">
       <div className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px]"></div>
 
-      <div className="absolute left-0 top-[16rem] z-20">
-        <LightRay />
-      </div>
+      <MemoizedLightRay />
 
       <TypingText />
 
