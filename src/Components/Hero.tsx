@@ -96,105 +96,106 @@ logic.`;
         </p>
       </motion.div>
 
-      <AnimatePresence mode="wait">
-        {isContactOpen ? (
-          <div className="flex flex-row items-center space-x-5 absolute top-[70rem]">
+      {isContactOpen ? (
+        <motion.div
+          className="flex flex-row items-center space-x-5 absolute top-[70rem] h-[64px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          key="contact-open"
+        >
+          {[
+            { icon: LucideArrowLeft, onClick: () => setIsContactOpen(false) },
+            { icon: WhatsappIcon, onClick: () => setIsContactOpen(false) },
+            { icon: LinkedinIcon, onClick: () => setIsContactOpen(false) },
+            { icon: Xicon, onClick: () => setIsContactOpen(false) },
+            { icon: Mailicon, onClick: () => setIsContactOpen(false) },
+          ].map((item, index) => (
             <motion.div
+              key={`contact-icon-${index}`}
               className="rounded-full cursor-pointer border border-white p-5 hover:bg-white transition-all ease-in-out group"
-              onClick={() => setIsContactOpen(false)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              onClick={item.onClick}
+              initial={{ y: 3, opacity: 0 }}
+              animate={{
+                y: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 10,
+                  mass: 0.5,
+                  delay: index * 0.1,
+                },
+              }}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.15 },
+              }}
+              whileTap={{
+                scale: 0.95,
+                transition: { duration: 0.1 },
+              }}
             >
               <div className="text-white group-hover:text-black transition-colors duration-200">
-                <LucideArrowLeft size={iconSize} color="currentColor" />
+                {index === 0 ? (
+                  <LucideArrowLeft size={iconSize} color="currentColor" />
+                ) : index === 1 ? (
+                  <WhatsappIcon
+                    width={iconSize}
+                    height={iconSize}
+                    color="currentColor"
+                  />
+                ) : index === 2 ? (
+                  <LinkedinIcon
+                    width={iconSize}
+                    height={iconSize}
+                    color="currentColor"
+                  />
+                ) : index === 3 ? (
+                  <Xicon
+                    width={iconSize}
+                    height={iconSize}
+                    color="currentColor"
+                  />
+                ) : (
+                  <Mailicon
+                    width={iconSize}
+                    height={iconSize}
+                    color="currentColor"
+                  />
+                )}
               </div>
             </motion.div>
-            <motion.div
-              className="rounded-full cursor-pointer border border-white p-5 hover:bg-white transition-all ease-in-out group"
-              onClick={() => setIsContactOpen(false)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="text-white group-hover:text-black transition-colors duration-200">
-                <WhatsappIcon
-                  width={iconSize}
-                  height={iconSize}
-                  color="currentColor"
-                />
-              </div>
-            </motion.div>
-            <motion.div
-              className="rounded-full cursor-pointer border border-white p-5 hover:bg-white transition-all ease-in-out group"
-              onClick={() => setIsContactOpen(false)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="text-white group-hover:text-black transition-colors duration-200">
-                <LinkedinIcon
-                  width={iconSize}
-                  height={iconSize}
-                  color="currentColor"
-                />
-              </div>
-            </motion.div>
-            <motion.div
-              className="rounded-full cursor-pointer border border-white p-5 hover:bg-white transition-all ease-in-out group"
-              onClick={() => setIsContactOpen(false)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="text-white group-hover:text-black transition-colors duration-200">
-                <Xicon
-                  width={iconSize}
-                  height={iconSize}
-                  color="currentColor"
-                />
-              </div>
-            </motion.div>
-            <motion.div
-              className="rounded-full cursor-pointer border border-white p-5 hover:bg-white transition-all ease-in-out group"
-              onClick={() => setIsContactOpen(false)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="text-white group-hover:text-black transition-colors duration-200">
-                <Mailicon
-                  width={iconSize}
-                  height={iconSize}
-                  color="currentColor"
-                />
-              </div>
-            </motion.div>
-          </div>
-        ) : (
+          ))}
+        </motion.div>
+      ) : (
+        <motion.div
+          className="flex flex-row items-center space-x-5 absolute top-[70rem]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
           <motion.div
-            className="flex flex-row items-center space-x-5 absolute top-[70rem]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            className="flex flex-row items-center bg-white rounded-[100px] w-[236px] h-[64px] justify-center space-x-2 cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <motion.div
-              className="flex flex-row items-center bg-white rounded-[100px] w-[236px] h-[64px] justify-center space-x-2 cursor-pointer"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <p className="font-poppins font-semibold text-[#1E1E1E] text-[18px]">
-                View Projets
-              </p>
-              <LucideArrowRight size={iconSize} color="#1E1E1E" />
-            </motion.div>
-
-            <motion.div
-              onClick={() => setIsContactOpen(true)}
-              className="w-[221px] h-[64px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer hover:bg-white hover:text-black"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get in Touch 💻
-            </motion.div>
+            <p className="font-poppins font-semibold text-[#1E1E1E] text-[18px]">
+              View Projets
+            </p>
+            <LucideArrowRight size={iconSize} color="#1E1E1E" />
           </motion.div>
-        )}
-      </AnimatePresence>
+
+          <motion.div
+            onClick={() => setIsContactOpen(true)}
+            className="w-[221px] h-[64px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer hover:bg-white hover:text-black"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Get in Touch 💻
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 };
