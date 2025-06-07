@@ -1,8 +1,11 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import BeamLight from "./Icons/BeamLight";
 import ArrowRight from "./Icons/ArrowRight";
 
 const Hero = () => {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [hoverContactsIndex, setHoverContactsIndex] = useState(0);
   return (
     <div className="flex items-center justify-center relative min-h-screen w-full">
       <div className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px]"></div>
@@ -29,18 +32,34 @@ const Hero = () => {
         </p>
       </div>
 
-      <div className="flex flex-row items-center space-x-5 absolute top-[70rem] ">
-        <div className="flex flex-row items-center bg-white rounded-[100px] w-[236px] h-[64px] justify-center space-x-2 cursor-pointer">
-          <p className="font-poppins font-semibold text-[#1E1E1E] text-[18px]">
-            View Projets
-          </p>
-          <ArrowRight />
+      {isContactOpen ? (
+        <div className="flex flex-row items-center space-x-5 absolute top-[70rem] ">
+          <div
+            className="rounded-full cursor-pointer border border-white rotate-180 p-5 hover:bg-white transition-all ease-in-out"
+            onClick={() => setIsContactOpen(false)}
+            onMouseEnter={() => setHoverContactsIndex(1)}
+            onMouseLeave={() => setHoverContactsIndex(0)}
+          >
+            <ArrowRight color={hoverContactsIndex !== 1 ? "white" : "black"} />
+          </div>
         </div>
+      ) : (
+        <div className="flex flex-row items-center space-x-5 absolute top-[70rem] ">
+          <div className="flex flex-row items-center bg-white rounded-[100px] w-[236px] h-[64px] justify-center space-x-2 cursor-pointer">
+            <p className="font-poppins font-semibold text-[#1E1E1E] text-[18px]">
+              View Projets
+            </p>
+            <ArrowRight />
+          </div>
 
-        <div className="w-[221px] h-[64px] flex items-center justify-center flex-row space-x-2  border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer">
-          Get in Touch 💻
+          <div
+            onClick={() => setIsContactOpen(true)}
+            className="w-[221px] h-[64px] flex items-center justify-center flex-row space-x-2  border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer"
+          >
+            Get in Touch 💻
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
