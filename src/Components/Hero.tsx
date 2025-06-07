@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight as LucideArrowRight } from "lucide-react";
 import LightRay from "./Icons/LightRay";
@@ -8,13 +8,9 @@ import LinkedinIcon from "./Icons/LinkedinIcon";
 import Xicon from "./Icons/Xicon";
 import Mailicon from "./Icons/Mailicon";
 
-const Hero = () => {
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  const [hoveredIcon, setHoveredIcon] = useState<number | null>(null);
+const TypingText = () => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const iconSize = 24; // Consistent size for all icons
 
   const fullText = `From interactive dashboards and multilingual portals to
 decentralized platforms on Ethereum and BSC, I
@@ -22,16 +18,39 @@ specialize in building full-stack solutions that combine
 elegant interfaces with secure, efficient blockchain
 logic.`;
 
-  useEffect(() => {
+  const updateText = useCallback(() => {
     if (currentIndex < fullText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText((prev) => prev + fullText[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
-      }, 30); // Adjust typing speed here
-
-      return () => clearTimeout(timeout);
+      setDisplayText((prev) => prev + fullText[currentIndex]);
+      setCurrentIndex((prev) => prev + 1);
     }
   }, [currentIndex, fullText]);
+
+  useEffect(() => {
+    const timeout = setTimeout(updateText, 30);
+    return () => clearTimeout(timeout);
+  }, [updateText]);
+
+  return (
+    <motion.p
+      className="absolute font-poppins text-base text-[#CCCCCC] right-10 top-[40rem] whitespace-pre-line w-[435px] z-20"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {displayText}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.5, repeat: Infinity }}
+        className="inline-block w-[2px] h-[1em] bg-[#CCCCCC] ml-[2px] align-middle"
+      />
+    </motion.p>
+  );
+};
+
+const Hero = () => {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [hoveredIcon, setHoveredIcon] = useState<number | null>(null);
+  const iconSize = 24;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -99,26 +118,14 @@ logic.`;
     <div className="flex items-center justify-center relative min-h-screen w-full">
       <div className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px]"></div>
 
-      <motion.p
-        className="absolute font-poppins text-base text-[#CCCCCC] right-10 top-[40rem] whitespace-pre-line w-[435px]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        {displayText}
-        <motion.span
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.5, repeat: Infinity }}
-          className="inline-block w-[2px] h-[1em] bg-[#CCCCCC] ml-[2px] align-middle"
-        />
-      </motion.p>
-
-      <div className="absolute left-0 top-[16rem]">
+      <div className="absolute left-0 top-[16rem] z-10">
         <LightRay />
       </div>
 
+      <TypingText />
+
       <motion.div
-        className="flex flex-col absolute space-y-3 top-[55rem] left-[10rem]"
+        className="flex flex-col absolute space-y-3 top-[55rem] left-[10rem] z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
