@@ -51,7 +51,7 @@ const Topbar = () => {
         </motion.p>
       </div>
 
-      <div className="flex flex-row h-[68px] bg-[#020126] bg-opacity-65 w-[592px] border border-[#4E4E4E] items-center justify-between px-5 rounded-[100px]">
+      <div className="flex flex-row h-[68px] bg-black bg-opacity-35 w-[592px] border border-[#4E4E4E] items-center justify-between px-5 rounded-[100px]">
         <p className="text-white font-poppins font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out">
           Home
         </p>
