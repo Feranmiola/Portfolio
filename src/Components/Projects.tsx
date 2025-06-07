@@ -59,14 +59,12 @@ const Projects = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <div className="w-[636px] h-[382px] overflow-hidden">
-              <motion.div className="w-full h-full">
-                <img
-                  src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214380/Frame_15_zsz9gs.webp"
-                  className="w-full h-full object-cover"
-                  alt="Nefesol"
-                />
-              </motion.div>
+            <div className="w-[636px] h-[382px]">
+              <img
+                src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214380/Frame_15_zsz9gs.webp"
+                className="w-full h-full"
+                alt="Nefesol"
+              />
             </div>
 
             <div className="flex flex-col w-[484px] h-[423px] justify-between py-3">
@@ -204,14 +202,12 @@ const Projects = () => {
               </motion.div>
             </div>
 
-            <div className="w-[636px] h-[382px] overflow-hidden relative">
-              <div className="absolute inset-0">
-                <img
-                  src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214380/448_1x_shots_so_1_j5bbxu.webp"
-                  className="w-full h-full object-cover"
-                  alt="CO2 Calculator"
-                />
-              </div>
+            <div className="w-[636px] h-[382px]">
+              <img
+                src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214380/448_1x_shots_so_1_j5bbxu.webp"
+                className="w-full h-full "
+                alt="CO2 Calculator"
+              />
             </div>
           </motion.div>
 
@@ -223,13 +219,11 @@ const Projects = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             <div className="w-[636px] h-[382px] overflow-hidden">
-              <motion.div className="w-full h-full">
-                <img
-                  src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214380/Frame_15_1_dmxv1c.webp"
-                  className="w-full h-full object-cover"
-                  alt="Akeso"
-                />
-              </motion.div>
+              <img
+                src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214380/Frame_15_1_dmxv1c.webp"
+                className="w-full h-full "
+                alt="Akeso"
+              />
             </div>
 
             <div className="flex flex-col w-[484px] h-[423px] justify-between py-3">
@@ -365,13 +359,11 @@ const Projects = () => {
             </div>
 
             <div className="w-[636px] h-[382px] overflow-hidden">
-              <motion.div className="w-full h-full">
-                <img
-                  src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214379/Frame_15_3_howzqk.webp"
-                  className="w-full h-full object-cover"
-                  alt="Stepverse"
-                />
-              </motion.div>
+              <img
+                src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214379/Frame_15_3_howzqk.webp"
+                className="w-full h-full "
+                alt="Stepverse"
+              />
             </div>
           </motion.div>
 
@@ -383,13 +375,11 @@ const Projects = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             <div className="w-[636px] h-[382px] overflow-hidden">
-              <motion.div className="w-full h-full">
-                <img
-                  src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214380/Frame_16_h4swtl.webp"
-                  className="w-full h-full object-cover"
-                  alt="Webmacht"
-                />
-              </motion.div>
+              <img
+                src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749214380/Frame_16_h4swtl.webp"
+                className="w-full h-full "
+                alt="Webmacht"
+              />
             </div>
             <div className="flex flex-col w-[484px] h-[423px] justify-between py-3">
               <motion.div
