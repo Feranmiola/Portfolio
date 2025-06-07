@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight as LucideArrowRight } from "lucide-react";
 import LightRay from "./Icons/LightRay";
@@ -11,8 +11,27 @@ import Mailicon from "./Icons/Mailicon";
 const Hero = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [hoveredIcon, setHoveredIcon] = useState<number | null>(null);
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const iconSize = 24; // Consistent size for all icons
+
+  const fullText = `From interactive dashboards and multilingual portals to
+decentralized platforms on Ethereum and BSC, I
+specialize in building full-stack solutions that combine
+elegant interfaces with secure, efficient blockchain
+logic.`;
+
+  useEffect(() => {
+    if (currentIndex < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText((prev) => prev + fullText[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
+      }, 30); // Adjust typing speed here
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, fullText]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -80,13 +99,19 @@ const Hero = () => {
     <div className="flex items-center justify-center relative min-h-screen w-full">
       <div className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px]"></div>
 
-      <p className="absolute font-poppins text-base text-[#CCCCCC] right-10 top-[40rem]">
-        From interactive dashboards and multilingual portals <br /> to
-        decentralized platforms on Ethereum and BSC, I <br />
-        specialize in building full-stack solutions that combine <br />
-        elegant interfaces with secure, efficient blockchain <br />
-        logic.
-      </p>
+      <motion.p
+        className="absolute font-poppins text-base text-[#CCCCCC] right-10 top-[40rem] whitespace-pre-line w-[435px]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {displayText}
+        <motion.span
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.5, repeat: Infinity }}
+          className="inline-block w-[2px] h-[1em] bg-[#CCCCCC] ml-[2px] align-middle"
+        />
+      </motion.p>
 
       <div className="absolute left-0 top-[16rem]">
         <LightRay />
