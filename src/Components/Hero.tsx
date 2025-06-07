@@ -8,7 +8,7 @@ import LinkedinIcon from "./Icons/LinkedinIcon";
 import Xicon from "./Icons/Xicon";
 import Mailicon from "./Icons/Mailicon";
 
-const TypingText = () => {
+const TypingText = React.memo(() => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -32,7 +32,7 @@ logic.`;
 
   return (
     <motion.p
-      className="absolute font-poppins text-base text-[#CCCCCC] right-10 top-[40rem] whitespace-pre-line w-[435px] z-20"
+      className="absolute font-poppins text-base text-[#CCCCCC] right-10 top-[40rem] whitespace-pre-line w-[435px] z-30"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -45,37 +45,17 @@ logic.`;
       />
     </motion.p>
   );
-};
+});
 
 const Hero = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
   const iconSize = 24;
-
-  const fullText = `From interactive dashboards and multilingual portals to
-decentralized platforms on Ethereum and BSC, I
-specialize in building full-stack solutions that combine
-elegant interfaces with secure, efficient blockchain
-logic.`;
-
-  const updateText = useCallback(() => {
-    if (currentIndex < fullText.length) {
-      setDisplayText((prev) => prev + fullText[currentIndex]);
-      setCurrentIndex((prev) => prev + 1);
-    }
-  }, [currentIndex, fullText]);
-
-  useEffect(() => {
-    const timeout = setTimeout(updateText, 30);
-    return () => clearTimeout(timeout);
-  }, [updateText]);
 
   return (
     <div className="flex items-center justify-center relative min-h-screen w-full">
       <div className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px]"></div>
 
-      <div className="absolute left-0 top-[16rem] z-10">
+      <div className="absolute left-0 top-[16rem] z-20">
         <LightRay />
       </div>
 
