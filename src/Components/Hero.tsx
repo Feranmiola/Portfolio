@@ -8,8 +8,12 @@ import LinkedinIcon from "./Icons/LinkedinIcon";
 import Xicon from "./Icons/Xicon";
 import Mailicon from "./Icons/Mailicon";
 
-const MemoizedLightRay = memo(() => (
-  <div className="absolute left-0 top-[16rem] z-20">
+const MemoizedLightRay = memo(({ isMobile }: { isMobile: boolean }) => (
+  <div
+    className={`absolute ${
+      isMobile ? "top-0 left-0" : "top-[16rem] left-0"
+    } z-20`}
+  >
     <LightRay />
   </div>
 ));
@@ -55,9 +59,76 @@ logic.`;
   );
 });
 
-const Hero = () => {
+const StaticText = () => (
+  <motion.p
+    className="absolute font-poppins text-sm sm:text-base text-[#CCCCCC] right-4 top-[28rem] sm:top-[32rem] whitespace-pre-line max-w-[90%] sm:max-w-[400px] z-30"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    From interactive dashboards and multilingual portals to decentralized
+    platforms on Ethereum and BSC, I specialize in building full-stack solutions
+    that combine elegant interfaces with secure, efficient blockchain logic.
+  </motion.p>
+);
+
+const MobileHero = () => (
+  <div className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden px-0 pt-8 space-y-6">
+    <MemoizedLightRay isMobile={true} />
+
+    <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] border-[6px] border-[#E4E4E4] rounded-full">
+      <img
+        src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp"
+        className="w-full h-full rounded-full"
+        alt="Feranmi Ola"
+      />
+    </div>
+
+    <motion.div
+      className="flex flex-col items-center text-center px-4 z-20"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, delay: 0.5 }}
+    >
+      <p className="text-xs sm:text-sm text-center font-merriweather">
+        Frontend Development / Smart Contract Engineering / End-to-End
+        Integration
+      </p>
+      <p className="text-[32px] sm:text-[40px] md:text-[64px] font-merriweather leading-tight bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent">
+        I'm <span className="font-bold">Feranmi Ola</span>
+      </p>
+    </motion.div>
+
+    <StaticText />
+  </div>
+);
+
+const DesktopHero = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const iconSize = 24;
+
+  const handleContactClick = (type: string) => {
+    switch (type) {
+      case "whatsapp":
+        window.open("https://wa.me/2348132402823", "_blank");
+        break;
+      case "linkedin":
+        window.open(
+          "https://www.linkedin.com/in/oluwaferanmi-osunjuyigbe12/",
+          "_blank"
+        );
+        break;
+      case "x":
+        window.open("https://x.com/feroomeeee", "_blank");
+        break;
+      case "mail":
+        window.open("mailto:osunjuyigbeiyin@gmail.com", "_blank");
+        break;
+      default:
+        break;
+    }
+    setIsContactOpen(false);
+  };
 
   return (
     <div className="flex items-center justify-center relative min-h-screen w-full">
@@ -68,7 +139,7 @@ const Hero = () => {
         />
       </div>
 
-      <MemoizedLightRay />
+      <MemoizedLightRay isMobile={false} />
 
       <TypingText />
 
@@ -97,10 +168,16 @@ const Hero = () => {
         >
           {[
             { icon: LucideArrowLeft, onClick: () => setIsContactOpen(false) },
-            { icon: WhatsappIcon, onClick: () => setIsContactOpen(false) },
-            { icon: LinkedinIcon, onClick: () => setIsContactOpen(false) },
-            { icon: Xicon, onClick: () => setIsContactOpen(false) },
-            { icon: Mailicon, onClick: () => setIsContactOpen(false) },
+            {
+              icon: WhatsappIcon,
+              onClick: () => handleContactClick("whatsapp"),
+            },
+            {
+              icon: LinkedinIcon,
+              onClick: () => handleContactClick("linkedin"),
+            },
+            { icon: Xicon, onClick: () => handleContactClick("x") },
+            { icon: Mailicon, onClick: () => handleContactClick("mail") },
           ].map((item, index) => (
             <motion.div
               key={`contact-icon-${index}`}
@@ -189,6 +266,21 @@ const Hero = () => {
       )}
     </div>
   );
+};
+
+const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isMobile ? <MobileHero /> : <DesktopHero />;
 };
 
 export default Hero;
