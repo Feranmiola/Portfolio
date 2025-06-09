@@ -88,20 +88,22 @@ const Hero2 = () => {
             </motion.p>
           </motion.div>
 
-          <motion.img
-            src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749221635/image_1_1_fthwdu.webp"
-            className="w-[456px] h-[481px]"
-            alt="Image 2"
-            variants={textVariants}
-            whileHover={{
-              scale: 1.02,
-              transition: {
-                type: "spring",
-                stiffness: 300,
-                damping: 20,
-              },
-            }}
-          />
+          <div className="rotate-[15deg]">
+            <motion.img
+              src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505208/WhatsApp_Image_2025-06-09_at_22.37.41_6a9c5a28_kojwuq.webp"
+              className="w-[456px] h-[481px] border-[4px] rounded-[12px] shadow-lg"
+              alt="Image 2"
+              variants={textVariants}
+              whileHover={{
+                scale: 1.02,
+                transition: {
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                },
+              }}
+            />
+          </div>
         </div>
       </motion.div>
     </div>
