@@ -61,7 +61,12 @@ const Hero = () => {
 
   return (
     <div className="flex items-center justify-center relative min-h-screen w-full">
-      <div className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px]"></div>
+      <div className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px]">
+        <img
+          src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp"
+          className="w-full h-full rounded-[625.58px]"
+        />
+      </div>
 
       <MemoizedLightRay />
 

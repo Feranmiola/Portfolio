@@ -29,15 +29,22 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* Custom text selection styles */
+::selection {
+  background: rgba(179, 177, 243, 0.3); /* Light purple with transparency */
+  color: white;
+}
 
+::-moz-selection {
+  background: rgba(179, 177, 243, 0.3); /* For Firefox */
+  color: white;
+}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-
 }
-
 
 html {
   @apply scroll-smooth;
@@ -45,9 +52,7 @@ html {
   -ms-overflow-style: none;
 }
 
-
 @media screen and (min-width: 1024px) {
-
   html {
     scrollbar-width: none;
     -ms-overflow-style: none;
