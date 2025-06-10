@@ -9,11 +9,6 @@ export const metadata: Metadata = {
   title: "Feranmi Ola | Frontend & Blockchain Developer",
   description:
     "Frontend and Blockchain Developer specializing in React, Next.js, and Solidity. Building high-performance user interfaces and decentralized applications with a focus on elegant design and secure blockchain logic.",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
   manifest: "/site.webmanifest",
   keywords: [
     "Feranmi Ola",
@@ -51,9 +46,9 @@ export const metadata: Metadata = {
     siteName: "Feranmi Ola Portfolio",
     images: [
       {
-        url: "https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp",
-        width: 1200,
-        height: 630,
+        url: "https://res.cloudinary.com/debiu7z1b/image/upload/v1749562302/WhatsApp_Image_2025-06-10_at_14.23.01_94fe037e_jhbahe.jpg",
+        width: 1024,
+        height: 1024,
         alt: "Feranmi Ola - Frontend & Blockchain Developer",
       },
     ],
@@ -65,7 +60,7 @@ export const metadata: Metadata = {
       "Frontend and Blockchain Developer specializing in React, Next.js, and Solidity. Building high-performance user interfaces and decentralized applications.",
     creator: "@feroomeeee",
     images: [
-      "https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp",
+      "https://res.cloudinary.com/debiu7z1b/image/upload/v1749562302/WhatsApp_Image_2025-06-10_at_14.23.01_94fe037e_jhbahe.jpg",
     ],
   },
   robots: {
@@ -101,23 +96,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="icon"
-          href="/favicon-16x16.png"
-          sizes="16x16"
-          type="image/png"
-        />
-        <link
-          rel="icon"
-          href="/favicon-32x32.png"
-          sizes="32x32"
-          type="image/png"
-        />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-      </head>
       <body className={`${inter.className}`}>{children}</body>
     </html>
   );
