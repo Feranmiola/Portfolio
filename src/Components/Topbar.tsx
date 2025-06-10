@@ -34,8 +34,8 @@ const Topbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between flex-row fixed w-full py-10 px-20 z-[9999] md:px-10 sm:px-5">
-      <div className="relative h-[32px] w-[200px] md:w-[150px] sm:w-[100px]">
+    <div className="flex items-center justify-between flex-row fixed w-full py-10 lg:px-20 z-[9999] md:px-10 max-md:px-5">
+      <div className="relative h-[32px] w-[200px] md:w-[150px] ">
         <motion.p
           className="absolute left-0 text-white text-2xl -skew-x-[5deg] font-bold font-merriweather whitespace-nowrap md:text-xl sm:text-lg"
           style={{
@@ -59,7 +59,7 @@ const Topbar = () => {
         </motion.p>
       </div>
 
-      <div className="flex flex-row h-[68px] bg-black bg-opacity-35 w-[592px] border border-[#4E4E4E] items-center justify-between px-5 rounded-[100px] md:w-[450px] md:h-[54px] sm:w-[300px] sm:h-[44px] sm:px-3">
+      <div className="flex flex-row h-[68px] bg-black bg-opacity-35 w-[592px] border border-[#4E4E4E] items-center justify-between px-5 rounded-[100px] md:w-[450px] md:h-[54px] sm:w-[300px] max-md:hidden sm:h-[44px] sm:px-3">
         <p
           onClick={() => scrollToSection("hero")}
           className="text-white font-poppins font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out md:text-sm sm:text-xs"
