@@ -12,7 +12,7 @@ const MemoizedLightRay = memo(({ isMobile }: { isMobile: boolean }) => (
   <div
     className={`absolute ${
       isMobile ? "top-0 left-0" : "top-[16rem] left-0"
-    } z-20`}
+    } z-10`}
   >
     <LightRay />
   </div>
@@ -59,49 +59,173 @@ logic.`;
   );
 });
 
-const StaticText = () => (
-  <motion.p
-    className="absolute font-poppins text-sm sm:text-base text-[#CCCCCC] right-4 top-[28rem] sm:top-[32rem] whitespace-pre-line max-w-[90%] sm:max-w-[400px] z-30"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
-  >
-    From interactive dashboards and multilingual portals to decentralized
-    platforms on Ethereum and BSC, I specialize in building full-stack solutions
-    that combine elegant interfaces with secure, efficient blockchain logic.
-  </motion.p>
-);
+const MobileHero = () => {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const iconSize = 24;
 
-const MobileHero = () => (
-  <div className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden px-0 pt-8 space-y-6">
-    <MemoizedLightRay isMobile={true} />
+  const handleContactClick = (type: string) => {
+    switch (type) {
+      case "whatsapp":
+        window.open("https://wa.me/2348132402823", "_blank");
+        break;
+      case "linkedin":
+        window.open(
+          "https://www.linkedin.com/in/oluwaferanmi-osunjuyigbe12/",
+          "_blank"
+        );
+        break;
+      case "x":
+        window.open("https://x.com/feroomeeee", "_blank");
+        break;
+      case "mail":
+        window.open("mailto:osunjuyigbeiyin@gmail.com", "_blank");
+        break;
+      default:
+        break;
+    }
+    setIsContactOpen(false);
+  };
 
-    <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] border-[6px] border-[#E4E4E4] rounded-full">
-      <img
-        src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp"
-        className="w-full h-full rounded-full"
-        alt="Feranmi Ola"
-      />
+  return (
+    <div className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden">
+      {/* Light rays with no padding - hugging the screen wall */}
+      <MemoizedLightRay isMobile={true} />
+
+      {/* Profile Image */}
+      <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] border-[6px] border-[#E4E4E4] rounded-full mt-40 mb-8">
+        <img
+          src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp"
+          className="w-full h-full rounded-full"
+          alt="Feranmi Ola"
+        />
+      </div>
+
+      {/* Text Content */}
+      <motion.div
+        className="flex flex-col items-center text-center px-4 z-30 mb-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+      >
+        <p className="text-xs sm:text-sm text-center font-merriweather mb-4">
+          Frontend Development / Smart Contract Engineering / End-to-End
+          Integration
+        </p>
+        <p className="text-[32px] sm:text-[40px] md:text-[48px] font-merriweather leading-tight bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent mb-6">
+          I'm <span className="font-bold">Feranmi Ola</span>
+        </p>
+      </motion.div>
+
+      {/* Description Text */}
+      <motion.p
+        className="font-poppins text-sm sm:text-base text-[#CCCCCC] text-center px-4 max-w-[90%] sm:max-w-[500px] z-40 mb-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 1 }}
+      >
+        From interactive dashboards and multilingual portals to decentralized
+        platforms on Ethereum and BSC, I specialize in building full-stack
+        solutions that combine elegant interfaces with secure, efficient
+        blockchain logic.
+      </motion.p>
+
+      {/* Contact Section */}
+      <AnimatePresence mode="wait">
+        {isContactOpen ? (
+          <motion.div
+            className="flex flex-row items-center space-x-4 h-[64px] z-50"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            key="contact-open"
+          >
+            {[
+              { icon: LucideArrowLeft, onClick: () => setIsContactOpen(false) },
+              {
+                icon: WhatsappIcon,
+                onClick: () => handleContactClick("whatsapp"),
+              },
+              {
+                icon: LinkedinIcon,
+                onClick: () => handleContactClick("linkedin"),
+              },
+              { icon: Xicon, onClick: () => handleContactClick("x") },
+              { icon: Mailicon, onClick: () => handleContactClick("mail") },
+            ].map((item, index) => (
+              <motion.div
+                key={`contact-icon-${index}`}
+                className="rounded-full cursor-pointer border border-white p-3 sm:p-4 hover:bg-white transition-all ease-in-out group"
+                onClick={item.onClick}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                  transition: {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 10,
+                    mass: 0.5,
+                    delay: index * 0.1,
+                  },
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.15 },
+                }}
+                whileTap={{
+                  scale: 0.95,
+                  transition: { duration: 0.1 },
+                }}
+              >
+                <div className="text-white group-hover:text-black transition-colors duration-200">
+                  {index === 0 ? (
+                    <LucideArrowLeft size={20} color="currentColor" />
+                  ) : index === 1 ? (
+                    <WhatsappIcon width={20} height={20} color="currentColor" />
+                  ) : index === 2 ? (
+                    <LinkedinIcon width={20} height={20} color="currentColor" />
+                  ) : index === 3 ? (
+                    <Xicon width={20} height={20} color="currentColor" />
+                  ) : (
+                    <Mailicon width={20} height={20} color="currentColor" />
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 px-4 z-50"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            key="contact-closed"
+          >
+            <motion.div
+              className="flex flex-row items-center bg-white rounded-[100px] w-full sm:w-[200px] h-[56px] justify-center space-x-2 cursor-pointer px-6"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <p className="font-poppins font-semibold text-[#1E1E1E] text-[16px]">
+                View Projects
+              </p>
+              <LucideArrowRight size={20} color="#1E1E1E" />
+            </motion.div>
+
+            <motion.div
+              onClick={() => setIsContactOpen(true)}
+              className="w-full sm:w-[200px] h-[56px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[16px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer hover:bg-white hover:text-black px-6"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Get in Touch 💻
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-
-    <motion.div
-      className="flex flex-col items-center text-center px-4 z-20"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0.5 }}
-    >
-      <p className="text-xs sm:text-sm text-center font-merriweather">
-        Frontend Development / Smart Contract Engineering / End-to-End
-        Integration
-      </p>
-      <p className="text-[32px] sm:text-[40px] md:text-[64px] font-merriweather leading-tight bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent">
-        I'm <span className="font-bold">Feranmi Ola</span>
-      </p>
-    </motion.div>
-
-    <StaticText />
-  </div>
-);
+  );
+};
 
 const DesktopHero = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -249,7 +373,7 @@ const DesktopHero = () => {
             whileTap={{ scale: 0.98 }}
           >
             <p className="font-poppins font-semibold text-[#1E1E1E] text-[18px]">
-              View Projets
+              View Projects
             </p>
             <LucideArrowRight size={iconSize} color="#1E1E1E" />
           </motion.div>
