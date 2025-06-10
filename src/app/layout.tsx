@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: "Feranmi Ola Portfolio",
     images: [
       {
-        url: "https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp",
+        url: "https://res.cloudinary.com/debiu7z1b/image/upload/v1749562302/WhatsApp_Image_2025-06-10_at_14.23.01_94fe037e_jhbahe.jpg",
         width: 1200,
         height: 630,
         alt: "Feranmi Ola - Frontend & Blockchain Developer",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
       "Frontend and Blockchain Developer specializing in React, Next.js, and Solidity. Building high-performance user interfaces and decentralized applications.",
     creator: "@feroomeeee",
     images: [
-      "https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp",
+      "https://res.cloudinary.com/debiu7z1b/image/upload/v1749562302/WhatsApp_Image_2025-06-10_at_14.23.01_94fe037e_jhbahe.jpg",
     ],
   },
   robots: {
