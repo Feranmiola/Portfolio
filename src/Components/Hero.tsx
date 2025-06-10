@@ -61,6 +61,8 @@ logic.`;
 
 const MobileHero = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const iconSize = 24;
 
   const handleContactClick = (type: string) => {
@@ -86,8 +88,31 @@ const MobileHero = () => {
     setIsContactOpen(false);
   };
 
+  useEffect(() => {
+    // Reset scroll position on mount
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden">
+      {/* Loading Overlay */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            className="fixed inset-0 bg-black z-[9999] flex items-center justify-center"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <motion.div
+              className="w-16 h-16 border-4 border-white border-t-transparent rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Light rays with no padding - hugging the screen wall */}
       <MemoizedLightRay isMobile={true} />
 
@@ -95,7 +120,7 @@ const MobileHero = () => {
       <motion.div
         className="relative w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] border-[6px] border-[#E4E4E4] rounded-full mt-40 mb-8 overflow-hidden"
         initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
+        animate={{ scale: 1, opacity: isImageLoaded ? 1 : 0 }}
         transition={{
           duration: 0.5,
           ease: "easeOut",
@@ -103,10 +128,10 @@ const MobileHero = () => {
       >
         <motion.img
           src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp"
-          className="w-full h-full object-cover rounded-full"
+          className="w-full h-full rounded-full"
           alt="Feranmi Ola"
           loading="eager"
-          sizes="(max-width: 640px) 220px, 280px"
+          sizes="220px, 280px"
           width={280}
           height={280}
           initial={{ scale: 1.1 }}
@@ -115,6 +140,10 @@ const MobileHero = () => {
             duration: 0.8,
             ease: "easeOut",
           }}
+          onLoad={() => {
+            setIsImageLoaded(true);
+            setIsLoading(false);
+          }}
         />
       </motion.div>
 
@@ -122,7 +151,7 @@ const MobileHero = () => {
       <motion.div
         className="flex flex-col items-center text-center px-4 z-30 mb-8"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: isImageLoaded ? 1 : 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
         <p className="text-xs sm:text-sm text-center font-merriweather mb-4">
@@ -137,7 +166,7 @@ const MobileHero = () => {
       <motion.p
         className="font-poppins text-sm sm:text-base text-[#CCCCCC] text-center px-4 max-w-[90%] sm:max-w-[500px] z-40 mb-12"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: isImageLoaded ? 1 : 0 }}
         transition={{ duration: 0.5, delay: 1 }}
       >
         From interactive dashboards and multilingual portals to decentralized
@@ -152,7 +181,7 @@ const MobileHero = () => {
           <motion.div
             className="flex flex-row items-center space-x-4 h-[64px] z-50"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: isImageLoaded ? 1 : 0, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             key="contact-open"
           >
@@ -214,7 +243,7 @@ const MobileHero = () => {
           <motion.div
             className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 px-4 z-50"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: isImageLoaded ? 1 : 0, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             key="contact-closed"
           >

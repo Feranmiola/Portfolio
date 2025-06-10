@@ -9,11 +9,7 @@ export const metadata: Metadata = {
   title: "Feranmi Ola | Frontend & Blockchain Developer",
   description:
     "Frontend and Blockchain Developer specializing in React, Next.js, and Solidity. Building high-performance user interfaces and decentralized applications with a focus on elegant design and secure blockchain logic.",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
+
   manifest: "/site.webmanifest",
   keywords: [
     "Feranmi Ola",
