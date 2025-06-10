@@ -85,7 +85,7 @@ const Footer = () => {
             >
               <Mailicon />
             </motion.div>
-            <p className="text-[#938F8F] text-[64px] md:text-[48px] max-md:text-[24px] font-bold font-merriweather tracking-tight">
+            <p className="text-[#938F8F] text-[64px] md:text-[48px] max-md:text-[20px] font-bold font-merriweather tracking-tight">
               <AnimatedText text="Email: osunjuyigbeiyin@gmail.com" />
             </p>
           </a>
