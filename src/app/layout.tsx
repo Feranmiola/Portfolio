@@ -9,6 +9,23 @@ export const metadata: Metadata = {
   title: "Feranmi Ola | Frontend & Blockchain Developer",
   description:
     "Frontend and Blockchain Developer specializing in React, Next.js, and Solidity. Building high-performance user interfaces and decentralized applications with a focus on elegant design and secure blockchain logic.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+      },
+    ],
+  },
+  manifest: "/site.webmanifest",
   keywords: [
     "Feranmi Ola",
     "Feranmi",
@@ -45,9 +62,9 @@ export const metadata: Metadata = {
     siteName: "Feranmi Ola Portfolio",
     images: [
       {
-        url: "https://res.cloudinary.com/debiu7z1b/image/upload/v1749562302/WhatsApp_Image_2025-06-10_at_14.23.01_94fe037e_jhbahe.jpg",
-        width: 1024,
-        height: 1024,
+        url: "https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp",
+        width: 1200,
+        height: 630,
         alt: "Feranmi Ola - Frontend & Blockchain Developer",
       },
     ],
@@ -59,7 +76,7 @@ export const metadata: Metadata = {
       "Frontend and Blockchain Developer specializing in React, Next.js, and Solidity. Building high-performance user interfaces and decentralized applications.",
     creator: "@feroomeeee",
     images: [
-      "https://res.cloudinary.com/debiu7z1b/image/upload/v1749562302/WhatsApp_Image_2025-06-10_at_14.23.01_94fe037e_jhbahe.jpg",
+      "https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp",
     ],
   },
   robots: {
