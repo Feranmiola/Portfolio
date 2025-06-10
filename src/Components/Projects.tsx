@@ -110,7 +110,9 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <motion.div
+                <motion.a
+                  href="https://nefesol.com"
+                  target="_blank"
                   className="flex flex-row items-center bg-white rounded-[100px] w-full sm:w-[236px] h-[54px] justify-center space-x-2 cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
@@ -120,10 +122,12 @@ const Projects = () => {
                     Visit Site
                   </p>
                   <ArrowRight />
-                </motion.div>
+                </motion.a>
 
-                <motion.div
-                  className="w-full sm:w-[221px] h-[54px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer"
+                <motion.a
+                  href="https://github.com/feranmiola/nefesol"
+                  target="_blank"
+                  className="w-full sm:w-[221px] h-[54px]  items-center justify-center hidden flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
                   whileTap="tap"
@@ -132,7 +136,7 @@ const Projects = () => {
                     View Code
                   </p>
                   <ArrowRight color="white" />
-                </motion.div>
+                </motion.a>
               </motion.div>
             </div>
           </motion.div>
@@ -186,8 +190,10 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <motion.div
-                  className="flex flex-row items-center bg-white rounded-[100px] w-full sm:w-[236px] h-[54px] justify-center space-x-2 cursor-pointer"
+                <motion.a
+                  href="https://co2-calculator.vercel.app/"
+                  target="_blank"
+                  className="hidden flex-row items-center bg-white rounded-[100px] w-full sm:w-[236px] h-[54px] justify-center space-x-2 cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
                   whileTap="tap"
@@ -196,10 +202,12 @@ const Projects = () => {
                     Visit Site
                   </p>
                   <ArrowRight />
-                </motion.div>
+                </motion.a>
 
-                <motion.div
-                  className="w-full sm:w-[221px] h-[54px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer"
+                <motion.a
+                  href="https://github.com/feranmiola/co2-calculator"
+                  target="_blank"
+                  className="w-full sm:w-[221px] h-[54px] hidden items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
                   whileTap="tap"
@@ -208,7 +216,7 @@ const Projects = () => {
                     View Code
                   </p>
                   <ArrowRight color="white" />
-                </motion.div>
+                </motion.a>
               </motion.div>
             </div>
 
@@ -277,7 +285,9 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <motion.div
+                <motion.a
+                  href="https://www.akesohealthnetwork.com/"
+                  target="_blank"
                   className="flex flex-row items-center bg-white rounded-[100px] w-full sm:w-[236px] h-[54px] justify-center space-x-2 cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
@@ -287,9 +297,11 @@ const Projects = () => {
                     Visit Site
                   </p>
                   <ArrowRight />
-                </motion.div>
+                </motion.a>
 
-                <motion.div
+                <motion.a
+                  href="https://github.com/Feranmiola/AkesoHealth"
+                  target="_blank"
                   className="w-full sm:w-[221px] h-[54px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
@@ -299,7 +311,7 @@ const Projects = () => {
                     View Code
                   </p>
                   <ArrowRight color="white" />
-                </motion.div>
+                </motion.a>
               </motion.div>
             </div>
           </motion.div>
@@ -352,7 +364,9 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <motion.div
+                <motion.a
+                  href="https://stepverse.app/"
+                  target="_blank"
                   className="flex flex-row items-center bg-white rounded-[100px] w-full sm:w-[236px] h-[54px] justify-center space-x-2 cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
@@ -362,9 +376,11 @@ const Projects = () => {
                     Visit Site
                   </p>
                   <ArrowRight />
-                </motion.div>
+                </motion.a>
 
-                <motion.div
+                <motion.a
+                  href="https://github.com/Feranmiola/stepVerse"
+                  target="_blank"
                   className="w-full sm:w-[221px] h-[54px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
@@ -374,7 +390,7 @@ const Projects = () => {
                     View Code
                   </p>
                   <ArrowRight color="white" />
-                </motion.div>
+                </motion.a>
               </motion.div>
             </div>
 
@@ -441,7 +457,9 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <motion.div
+                <motion.a
+                  href="https://webmacht.de/"
+                  target="_blank"
                   className="flex flex-row items-center bg-white rounded-[100px] w-full sm:w-[236px] h-[54px] justify-center space-x-2 cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
@@ -451,9 +469,11 @@ const Projects = () => {
                     Visit Site
                   </p>
                   <ArrowRight />
-                </motion.div>
+                </motion.a>
 
-                <motion.div
+                <motion.a
+                  href="https://github.com/Feranmiola/Webmacht"
+                  target="_blank"
                   className="w-full sm:w-[221px] h-[54px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer"
                   variants={buttonVariants}
                   whileHover="hover"
@@ -463,7 +483,7 @@ const Projects = () => {
                     View Code
                   </p>
                   <ArrowRight color="white" />
-                </motion.div>
+                </motion.a>
               </motion.div>
             </div>
           </motion.div>
