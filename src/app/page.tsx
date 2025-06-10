@@ -4,6 +4,7 @@ import Hero from "@/Components/Hero";
 import Hero2 from "@/Components/Hero2";
 import Projects from "@/Components/Projects";
 import Topbar from "@/Components/Topbar";
+import SEO from "@/Components/SEO";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -92,23 +93,32 @@ export default function Home() {
   }, []);
 
   return (
-    <div
-      className="flex flex-col w-full min-h-screen transition-colors duration-500"
-      style={{ backgroundColor: bgColor }}
-    >
-      <Topbar />
-      <div id="hero">
-        <Hero />
+    <>
+      <SEO
+        title="Feranmi Ola"
+        description="Frontend and Blockchain Developer specializing in React, Next.js, and Solidity. Building high-performance user interfaces and decentralized applications with a focus on elegant design and secure blockchain logic."
+        canonical="https://feranmiola.com"
+        ogImage="https://res.cloudinary.com/debiu7z1b/image/upload/v1749562302/WhatsApp_Image_2025-06-10_at_14.23.01_94fe037e_jhbahe.jpg"
+        twitterHandle="@feroomeeee"
+      />
+      <div
+        className="flex flex-col w-full min-h-screen transition-colors duration-500"
+        style={{ backgroundColor: bgColor }}
+      >
+        <Topbar />
+        <div id="hero">
+          <Hero />
+        </div>
+        <div id="projects">
+          <Projects />
+        </div>
+        <div id="about">
+          <Hero2 />
+        </div>
+        <div id="contact">
+          <Footer />
+        </div>
       </div>
-      <div id="projects">
-        <Projects />
-      </div>
-      <div id="about">
-        <Hero2 />
-      </div>
-      <div id="contact">
-        <Footer />
-      </div>
-    </div>
+    </>
   );
 }
