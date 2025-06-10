@@ -93,6 +93,14 @@ const MobileHero = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+    // Add a delay before hiding the loading animation
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // 1 second delay
+  };
+
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden">
       {/* Loading Overlay */}
@@ -140,10 +148,7 @@ const MobileHero = () => {
             duration: 0.8,
             ease: "easeOut",
           }}
-          onLoad={() => {
-            setIsImageLoaded(true);
-            setIsLoading(false);
-          }}
+          onLoad={handleImageLoad}
         />
       </motion.div>
 
