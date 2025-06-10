@@ -97,10 +97,18 @@ export default function Home() {
       style={{ backgroundColor: bgColor }}
     >
       <Topbar />
-      <Hero />
-      <Projects />
-      <Hero2 />
-      <Footer />
+      <div id="hero">
+        <Hero />
+      </div>
+      <div id="projects">
+        <Projects />
+      </div>
+      <div id="about">
+        <Hero2 />
+      </div>
+      <div id="contact">
+        <Footer />
+      </div>
     </div>
   );
 }
