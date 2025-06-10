@@ -92,13 +92,31 @@ const MobileHero = () => {
       <MemoizedLightRay isMobile={true} />
 
       {/* Profile Image */}
-      <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] border-[6px] border-[#E4E4E4] rounded-full mt-40 mb-8">
-        <img
+      <motion.div
+        className="relative w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] border-[6px] border-[#E4E4E4] rounded-full mt-40 mb-8 overflow-hidden"
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          duration: 0.5,
+          ease: "easeOut",
+        }}
+      >
+        <motion.img
           src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp"
-          className="w-full h-full rounded-full"
+          className="w-full h-full object-cover rounded-full"
           alt="Feranmi Ola"
+          loading="eager"
+          sizes="(max-width: 640px) 220px, 280px"
+          width={280}
+          height={280}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeOut",
+          }}
         />
-      </div>
+      </motion.div>
 
       {/* Text Content */}
       <motion.div
@@ -108,8 +126,7 @@ const MobileHero = () => {
         transition={{ duration: 0.8, delay: 0.5 }}
       >
         <p className="text-xs sm:text-sm text-center font-merriweather mb-4">
-          Frontend Development / Smart Contract Engineering / End-to-End
-          Integration
+          Frontend || Blockchain Developer
         </p>
         <p className="text-[32px] sm:text-[40px] md:text-[48px] font-merriweather leading-tight bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent mb-6">
           I'm <span className="font-bold">Feranmi Ola</span>
@@ -256,15 +273,33 @@ const DesktopHero = () => {
 
   return (
     <div className="flex items-center justify-center relative min-h-screen w-full">
-      <div className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px]">
-        <img
+      <motion.div
+        className="flex w-[538px] h-[538px] border-[6px] border-[#E4E4E4] rounded-[625.58px] overflow-hidden"
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          duration: 0.5,
+          ease: "easeOut",
+        }}
+      >
+        <motion.img
           src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505209/WhatsApp_Image_2025-06-09_at_22.37.46_665e42d5_mgy37d.webp"
-          className="w-full h-full rounded-[625.58px]"
+          className="w-full h-full object-cover rounded-[625.58px]"
+          alt="Feranmi Ola"
+          loading="eager"
+          sizes="538px"
+          width={538}
+          height={538}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeOut",
+          }}
         />
-      </div>
+      </motion.div>
 
       <MemoizedLightRay isMobile={false} />
-
       <TypingText />
 
       <motion.div
@@ -274,8 +309,7 @@ const DesktopHero = () => {
         transition={{ duration: 0.8, delay: 0.5 }}
       >
         <p className="text-2xl font-merriweather">
-          Frontend Development / Smart Contract Engineering / End-to-End
-          Integration
+          Frontend || Blockchain Developer
         </p>
         <p className="-skew-x-[5deg] text-[128px] font-merriweather leading-none bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent">
           I'm <span className="font-bold">Feranmi Ola</span>
