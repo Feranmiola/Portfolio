@@ -46,24 +46,26 @@ const Hero2 = () => {
   };
 
   return (
-    <div className="w-full h-[1032px] bg-[#151431] flex items-center justify-center">
+    <div className="w-full min-h-screen bg-[#151431] flex items-center justify-center px-4 sm:px-6 md:px-8 py-8 md:py-16 lg:py-0">
       <motion.div
-        className="w-[1240px] h-[1032px] flex justify-evenly flex-col"
+        className="w-full max-w-[1240px] flex flex-col justify-center gap-8 sm:gap-12 md:gap-16 lg:gap-0 lg:justify-evenly lg:h-[1032px]"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
         <motion.p
-          className="font-trytype text-[40px] text-white font-bold leading-[3.5rem]"
+          className="font-trytype text-2xl sm:text-3xl md:text-4xl lg:text-[40px] text-white font-bold leading-tight sm:leading-relaxed md:leading-[3rem] lg:leading-[3.5rem] text-center lg:text-left"
           variants={textVariants}
         >
-          Building fast, Responsive, User-centered <br />
+          Building fast, Responsive, User-centered{" "}
+          <br className="hidden sm:block" />
           Web apps 🤞
         </motion.p>
-        <div className="flex flex-row justify-between items-center w-full">
+
+        <div className="flex flex-col md:flex-col lg:flex-row justify-between items-center w-full gap-8 md:gap-12 lg:gap-0">
           <motion.div
-            className="text-xl text-[#B1B0B0] font-trytype w-[558px]"
+            className="text-base sm:text-lg md:text-xl text-[#B1B0B0] font-trytype w-full lg:w-[558px] text-center lg:text-left"
             variants={containerVariants}
           >
             <motion.p variants={paragraphVariants}>
@@ -88,10 +90,10 @@ const Hero2 = () => {
             </motion.p>
           </motion.div>
 
-          <div className="rotate-[15deg]">
+          <div className="rotate-[15deg] flex-shrink-0">
             <motion.img
               src="https://res.cloudinary.com/debiu7z1b/image/upload/v1749505208/WhatsApp_Image_2025-06-09_at_22.37.41_6a9c5a28_kojwuq.webp"
-              className="w-[456px] h-[481px] border-[4px] rounded-[12px] shadow-lg"
+              className="w-[280px] h-[295px] sm:w-[320px] sm:h-[338px] md:w-[380px] md:h-[400px] lg:w-[456px] lg:h-[481px] border-[4px] rounded-[12px] shadow-lg object-cover"
               alt="Image 2"
               variants={textVariants}
               whileHover={{

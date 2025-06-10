@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1370px',
+      'xl': '1480px',
+      '2xl': '1536px',
+    },
       fontFamily: {
         merriweather: ['Merriweather', 'serif'],
         poppins: ['Poppins', 'sans-serif'],
