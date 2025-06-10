@@ -6,9 +6,33 @@ import Projects from "@/Components/Projects";
 import Topbar from "@/Components/Topbar";
 import SEO from "@/Components/SEO";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ClipLoader, BeatLoader, SyncLoader } from "react-spinners";
 
 export default function Home() {
   const [bgColor, setBgColor] = useState("#000000");
+  const [isLoading, setIsLoading] = useState(true);
+  const [showConnecting, setShowConnecting] = useState(false);
+
+  useEffect(() => {
+    // Reset scroll position on mount
+    window.scrollTo(0, 0);
+
+    // Show connecting animation after 0.7 seconds
+    const connectingTimer = setTimeout(() => {
+      setShowConnecting(true);
+    }, 700);
+
+    // Hide loading after 1 second
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(connectingTimer);
+      clearTimeout(loadingTimer);
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -101,6 +125,47 @@ export default function Home() {
         ogImage="https://res.cloudinary.com/debiu7z1b/image/upload/v1749562302/WhatsApp_Image_2025-06-10_at_14.23.01_94fe037e_jhbahe.jpg"
         twitterHandle="@feroomeeee"
       />
+
+      {/* Loading Overlay - Always render first */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            className="fixed inset-0 bg-black z-[9999] flex items-center justify-center"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {showConnecting ? (
+                <SyncLoader
+                  color="#ffffff"
+                  loading={true}
+                  size={20}
+                  margin={8}
+                  speedMultiplier={1.5}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                <BeatLoader
+                  color="#ffffff"
+                  loading={true}
+                  size={20}
+                  margin={8}
+                  speedMultiplier={1.5}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div
         className="flex flex-col w-full min-h-screen transition-colors duration-500"
         style={{ backgroundColor: bgColor }}

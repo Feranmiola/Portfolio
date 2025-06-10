@@ -62,7 +62,6 @@ logic.`;
 const MobileHero = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const iconSize = 24;
 
   const handleContactClick = (type: string) => {
@@ -95,32 +94,10 @@ const MobileHero = () => {
 
   const handleImageLoad = () => {
     setIsImageLoaded(true);
-    // Add a delay before hiding the loading animation
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000); // 1 second delay
   };
 
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-start overflow-hidden">
-      {/* Loading Overlay */}
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            className="fixed inset-0 bg-black z-[9999] flex items-center justify-center"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <motion.div
-              className="w-16 h-16 border-4 border-white border-t-transparent rounded-full"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Light rays with no padding - hugging the screen wall */}
       <MemoizedLightRay isMobile={true} />
 
@@ -191,7 +168,10 @@ const MobileHero = () => {
             key="contact-open"
           >
             {[
-              { icon: LucideArrowLeft, onClick: () => setIsContactOpen(false) },
+              {
+                icon: LucideArrowLeft,
+                onClick: () => setIsContactOpen(false),
+              },
               {
                 icon: WhatsappIcon,
                 onClick: () => handleContactClick("whatsapp"),
@@ -469,9 +449,13 @@ const Hero = () => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1024);
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return isMobile ? <MobileHero /> : <DesktopHero />;
