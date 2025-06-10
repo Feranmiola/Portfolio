@@ -218,7 +218,8 @@ const MobileHero = () => {
             exit={{ opacity: 0, y: -20 }}
             key="contact-closed"
           >
-            <motion.div
+            <motion.a
+              href="#projects"
               className="flex flex-row items-center bg-white rounded-[100px] w-full sm:w-[200px] h-[56px] justify-center space-x-2 cursor-pointer px-6"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -227,7 +228,7 @@ const MobileHero = () => {
                 View Projects
               </p>
               <LucideArrowRight size={20} color="#1E1E1E" />
-            </motion.div>
+            </motion.a>
 
             <motion.div
               onClick={() => setIsContactOpen(true)}
@@ -401,7 +402,8 @@ const DesktopHero = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <motion.div
+          <motion.a
+            href="#projects"
             className="flex flex-row items-center bg-white rounded-[100px] w-[236px] h-[64px] justify-center space-x-2 cursor-pointer"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -410,7 +412,7 @@ const DesktopHero = () => {
               View Projects
             </p>
             <LucideArrowRight size={iconSize} color="#1E1E1E" />
-          </motion.div>
+          </motion.a>
 
           <motion.div
             onClick={() => setIsContactOpen(true)}
