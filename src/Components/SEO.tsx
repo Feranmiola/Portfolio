@@ -17,8 +17,8 @@ export default function SEO({
   ogType = "website",
   twitterHandle,
 }: SEOProps) {
-  const siteTitle = "Your Site Name"; // Replace with your site name
-  const fullTitle = `${title} | ${siteTitle}`;
+  const siteTitle = "Feranmi Ola";
+  const fullTitle = `${title}`;
 
   return (
     <Head>
