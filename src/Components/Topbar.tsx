@@ -59,7 +59,7 @@ const Topbar = () => {
         </motion.p>
       </div>
 
-      <div className="flex flex-row h-[68px] bg-black bg-opacity-35 w-[592px] border border-[#4E4E4E] items-center justify-between px-5 rounded-[100px] md:w-[450px] md:h-[54px] sm:w-[300px] max-md:hidden sm:h-[44px] sm:px-3">
+      <div className="flex flex-row h-[68px] bg-black bg-opacity-35 w-[592px] border border-[#4E4E4E] items-center justify-between px-5 rounded-[100px] md:w-[400px] md:h-[54px] sm:w-[300px] max-md:hidden sm:h-[44px] sm:px-3">
         <p
           onClick={() => scrollToSection("hero")}
           className="text-white font-poppins font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out md:text-sm sm:text-xs"
