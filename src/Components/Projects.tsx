@@ -32,7 +32,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="flex items-center justify-center lg:pt-[30rem] pb-[15rem] md:pt-[20rem] md:pb-[10rem] sm:pt-[15rem] sm:pb-[8rem] px-4 sm:px-6 md:px-8">
+    <div className="flex items-center justify-center pt-[5rem] lg:pt-[30rem] pb-[15rem] md:pt-[20rem] md:pb-[10rem] sm:pt-[15rem] sm:pb-[8rem] px-4 sm:px-6 md:px-8">
       <div className="flex flex-col w-full max-w-[1240px] space-y-10 md:space-y-8 sm:space-y-6">
         <motion.div
           className="flex flex-col lg:flex-row w-full lg:justify-between lg:items-start space-y-4 lg:space-y-0"
