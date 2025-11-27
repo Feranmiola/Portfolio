@@ -21,22 +21,20 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, #000000, #2C0000);
+  min-height: 100vh;
 }
 
 /* Custom text selection styles */
 ::selection {
-  background: rgba(179, 177, 243, 0.3); /* Light purple with transparency */
+  background: rgba(179, 177, 243, 0.3);
+  /* Light purple with transparency */
   color: white;
 }
 
 ::-moz-selection {
-  background: rgba(179, 177, 243, 0.3); /* For Firefox */
+  background: rgba(179, 177, 243, 0.3);
+  /* For Firefox */
   color: white;
 }
 
