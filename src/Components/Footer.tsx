@@ -62,10 +62,10 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <p className="text-[48px] md:text-[40px] sm:text-[32px] text-white font-bold font-merriweather">
+          <p className="text-[48px] md:text-[40px] sm:text-[32px] text-white font-bold">
             Let's Work Together 👇
           </p>
-          <p className="text-[#B1B0B0] font-poppins text-xl md:text-lg sm:text-base">
+          <p className="text-[#B1B0B0] text-xl md:text-lg sm:text-base">
             Got a project in mind or need help building your next Web2 or Web3
             app? <br className="hidden sm:block" />
             Let's connect and build something great.
@@ -85,7 +85,7 @@ const Footer = () => {
             >
               <Mailicon />
             </motion.div>
-            <p className="text-[#938F8F] text-[64px] md:text-[48px] max-md:text-[18px] font-bold font-merriweather tracking-tight">
+            <p className="text-[#938F8F] text-[64px] md:text-[48px] max-md:text-[18px] font-bold tracking-tight">
               <AnimatedText text="Email: osunjuyigbeiyin@gmail.com" />
             </p>
           </a>

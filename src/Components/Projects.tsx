@@ -41,10 +41,10 @@ const Projects = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-merriweather text-[40px] md:text-[32px] sm:text-[24px] text-white leading-tight">
+          <p className="text-[40px] md:text-[32px] sm:text-[24px] text-white leading-tight">
             Projects I've Worked On
           </p>
-          <p className="font-poppins text-sm md:text-xs text-[#CCCCCC] lg:max-w-none max-w-full">
+          <p className="text-sm md:text-xs text-[#CCCCCC] lg:max-w-none max-w-full">
             I build high-performance user interfaces using React, Next.js,
             TypeScript, and Shadcn. My apps are scalable, multilingual, and
             user-focused.
@@ -76,10 +76,10 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <p className="font-merriweather text-white text-[32px] md:text-[28px] sm:text-[24px]">
+                <p className="text-white text-[32px] md:text-[28px] sm:text-[24px]">
                   Nefesol
                 </p>
-                <p className="font-poppins text-[#CCCCCC] text-base md:text-sm">
+                <p className="text-[#CCCCCC] text-base md:text-sm">
                   A carbon offset platform enabling users to plant trees and
                   receive certificates for their climate contributions. Features
                   multi-location support, PayPal integration, and automated
@@ -94,7 +94,7 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <p className="font-merriweather text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
+                <p className="text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
                   Technologies used
                 </p>
                 <div className="flex flex-row items-center space-x-4">
@@ -118,7 +118,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-[#1E1E1E] text-[16px]">
+                  <p className="font-semibold text-[#1E1E1E] text-[16px]">
                     Visit Site
                   </p>
                   <ArrowRight />
@@ -132,7 +132,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-white text-[16px]">
+                  <p className="font-semibold text-white text-[16px]">
                     View Code
                   </p>
                   <ArrowRight color="white" />
@@ -157,10 +157,10 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <p className="font-merriweather text-white text-[32px] md:text-[28px] sm:text-[24px]">
+                <p className="text-white text-[32px] md:text-[28px] sm:text-[24px]">
                   CO₂ Calculator
                 </p>
-                <p className="font-poppins text-[#CCCCCC] text-base md:text-sm">
+                <p className="text-[#CCCCCC] text-base md:text-sm">
                   Enterprise-grade emission tracking tool with multi-user roles
                   and multilingual dashboards. Integrates with Nefesol for
                   tree-based carbon offsetting.
@@ -174,7 +174,7 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <p className="font-merriweather text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
+                <p className="text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
                   Technologies used
                 </p>
                 <div className="flex flex-row items-center space-x-4">
@@ -198,7 +198,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-[#1E1E1E] text-[16px]">
+                  <p className="font-semibold text-[#1E1E1E] text-[16px]">
                     Visit Site
                   </p>
                   <ArrowRight />
@@ -212,7 +212,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-white text-[16px]">
+                  <p className="font-semibold text-white text-[16px]">
                     View Code
                   </p>
                   <ArrowRight color="white" />
@@ -253,10 +253,10 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <p className="font-merriweather text-white text-[32px] md:text-[28px] sm:text-[24px]">
+                <p className="text-white text-[32px] md:text-[28px] sm:text-[24px]">
                   Akeso Health
                 </p>
-                <p className="font-poppins text-[#CCCCCC] text-base md:text-sm">
+                <p className="text-[#CCCCCC] text-base md:text-sm">
                   A responsive web platform for connected patient care, designed
                   to streamline communication and reduce overhead for healthcare
                   providers.
@@ -270,7 +270,7 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <p className="font-merriweather text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
+                <p className="text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
                   Technologies used
                 </p>
                 <div className="flex flex-row items-center space-x-4">
@@ -293,7 +293,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-[#1E1E1E] text-[16px]">
+                  <p className="font-semibold text-[#1E1E1E] text-[16px]">
                     Visit Site
                   </p>
                   <ArrowRight />
@@ -307,7 +307,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-white text-[16px]">
+                  <p className="font-semibold text-white text-[16px]">
                     View Code
                   </p>
                   <ArrowRight color="white" />
@@ -332,10 +332,10 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <p className="font-merriweather text-white text-[32px] md:text-[28px] sm:text-[24px]">
+                <p className="text-white text-[32px] md:text-[28px] sm:text-[24px]">
                   Stepverse
                 </p>
-                <p className="font-poppins text-[#CCCCCC] text-base md:text-sm">
+                <p className="text-[#CCCCCC] text-base md:text-sm">
                   Web3 fitness game using Telegram Mini Apps. Features include
                   leaderboards, rewards, and community tracking.
                 </p>
@@ -348,7 +348,7 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <p className="font-merriweather text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
+                <p className="text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
                   Technologies used
                 </p>
                 <div className="flex flex-row items-center space-x-4">
@@ -372,7 +372,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-[#1E1E1E] text-[16px]">
+                  <p className="font-semibold text-[#1E1E1E] text-[16px]">
                     Visit Site
                   </p>
                   <ArrowRight />
@@ -386,7 +386,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-white text-[16px]">
+                  <p className="font-semibold text-white text-[16px]">
                     View Code
                   </p>
                   <ArrowRight color="white" />
@@ -426,10 +426,10 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <p className="font-merriweather text-white text-[32px] md:text-[28px] sm:text-[24px]">
+                <p className="text-white text-[32px] md:text-[28px] sm:text-[24px]">
                   Webmacht
                 </p>
-                <p className="font-poppins text-[#CCCCCC] text-base md:text-sm">
+                <p className="text-[#CCCCCC] text-base md:text-sm">
                   Worked across sectors to deliver tailored platforms — from
                   HIPAA-compliant portals to virtual real estate tools.
                 </p>
@@ -442,7 +442,7 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <p className="font-merriweather text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
+                <p className="text-white text-[20px] md:text-[18px] sm:text-[16px] px-5 py-2 border border-[#525252] rounded-[100px] w-max">
                   Technologies used
                 </p>
                 <div className="flex flex-row items-center space-x-4">
@@ -465,7 +465,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-[#1E1E1E] text-[16px]">
+                  <p className="font-semibold text-[#1E1E1E] text-[16px]">
                     Visit Site
                   </p>
                   <ArrowRight />
@@ -479,7 +479,7 @@ const Projects = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <p className="font-poppins font-semibold text-white text-[16px]">
+                  <p className="font-semibold text-white text-[16px]">
                     View Code
                   </p>
                   <ArrowRight color="white" />

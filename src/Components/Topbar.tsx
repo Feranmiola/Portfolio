@@ -29,7 +29,7 @@ const Topbar = () => {
     <div className="flex items-center justify-between flex-row fixed w-full py-10 lg:px-20 z-[9999] md:px-10 max-md:px-5">
       <div className="relative h-[32px] w-[200px] md:w-[150px] ">
         <motion.p
-          className="absolute left-0 text-white text-2xl -skew-x-[5deg] font-bold font-merriweather whitespace-nowrap md:text-xl sm:text-lg"
+          className="absolute left-0 text-white text-2xl -skew-x-[5deg] font-bold whitespace-nowrap md:text-xl sm:text-lg"
           style={{
             y: fullNameY,
             opacity: fullNameOpacity,
@@ -40,7 +40,7 @@ const Topbar = () => {
         </motion.p>
 
         <motion.p
-          className="absolute left-0 bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent text-[34px] font-bold font-merriweather whitespace-nowrap md:text-[28px] sm:text-[24px]"
+          className="absolute left-0 bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent text-[34px] font-bold whitespace-nowrap md:text-[28px] sm:text-[24px]"
           style={{
             y: initialsY,
             opacity: initialsOpacity,
@@ -54,19 +54,19 @@ const Topbar = () => {
       <div className="flex flex-row h-[68px] bg-black bg-opacity-35 w-[592px] border border-[#4E4E4E] items-center justify-between px-5 rounded-[100px] md:w-[400px] md:h-[54px] sm:w-[300px] max-md:hidden sm:h-[44px] sm:px-3">
         <a
           href="#hero"
-          className="text-white font-poppins font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out md:text-sm sm:text-xs"
+          className="text-white font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out md:text-sm sm:text-xs"
         >
           Home
         </a>
         <a
           href="#projects"
-          className="text-white font-poppins font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out md:text-sm sm:text-xs"
+          className="text-white font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out md:text-sm sm:text-xs"
         >
           Projects
         </a>
         <a
           href="#about"
-          className="text-white font-poppins font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out md:text-sm sm:text-xs"
+          className="text-white font-medium text-base cursor-pointer hover:text-[#B3B1F3] transition-all ease-in-out md:text-sm sm:text-xs"
         >
           About
         </a>

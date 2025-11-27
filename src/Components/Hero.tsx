@@ -44,7 +44,7 @@ logic.`;
 
   return (
     <motion.p
-      className="absolute font-poppins text-base text-[#CCCCCC] right-10 top-[40rem] whitespace-pre-line w-[435px] z-30"
+      className="absolute text-base text-[#CCCCCC] right-10 top-[40rem] whitespace-pre-line w-[435px] z-30"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -136,17 +136,17 @@ const MobileHero = () => {
         animate={{ opacity: isImageLoaded ? 1 : 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
-        <p className="text-xs sm:text-sm text-center font-merriweather mb-4">
+        <p className="text-xs sm:text-sm text-center mb-4">
           Frontend || Blockchain Developer
         </p>
-        <p className="text-[32px] sm:text-[40px] md:text-[48px] font-merriweather leading-tight bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent mb-6">
+        <p className="text-[32px] sm:text-[40px] md:text-[48px] leading-tight bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent mb-6">
           I'm <span className="font-bold">Feranmi Ola</span>
         </p>
       </motion.div>
 
       {/* Description Text */}
       <motion.p
-        className="font-poppins text-sm sm:text-base text-[#CCCCCC] text-center px-4 max-w-[90%] sm:max-w-[500px] z-40 mb-12"
+        className="text-sm sm:text-base text-[#CCCCCC] text-center px-4 max-w-[90%] sm:max-w-[500px] z-40 mb-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: isImageLoaded ? 1 : 0 }}
         transition={{ duration: 0.5, delay: 1 }}
@@ -238,7 +238,7 @@ const MobileHero = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <p className="font-poppins font-semibold text-[#1E1E1E] text-[16px]">
+              <p className="font-semibold text-[#1E1E1E] text-[16px]">
                 View Projects
               </p>
               <LucideArrowRight size={20} color="#1E1E1E" />
@@ -323,10 +323,10 @@ const DesktopHero = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
-        <p className="text-2xl font-merriweather">
+        <p className="text-2xl">
           Frontend || Blockchain Developer
         </p>
-        <p className="-skew-x-[5deg] text-[128px] font-merriweather leading-none bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent">
+        <p className="-skew-x-[5deg] text-[128px] leading-none bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent">
           I'm <span className="font-bold">Feranmi Ola</span>
         </p>
       </motion.div>
@@ -422,7 +422,7 @@ const DesktopHero = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <p className="font-poppins font-semibold text-[#1E1E1E] text-[18px]">
+            <p className="font-semibold text-[#1E1E1E] text-[18px]">
               View Projects
             </p>
             <LucideArrowRight size={iconSize} color="#1E1E1E" />

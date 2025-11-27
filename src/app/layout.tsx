@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import type { Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/Components/SmoothScroll";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Feranmi Ola | Frontend & Blockchain Developer",
@@ -105,10 +106,6 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-import SmoothScroll from "@/Components/SmoothScroll";
-
-// ... existing code ...
-
 export default function RootLayout({
   children,
 }: {
@@ -116,7 +113,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`${outfit.className}`}>
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

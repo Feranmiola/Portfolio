@@ -9,15 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1370px',
-      'xl': '1480px',
-      '2xl': '1536px',
-    },
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1370px',
+        'xl': '1480px',
+        '2xl': '1536px',
+      },
       fontFamily: {
         merriweather: ['Merriweather', 'serif'],
         poppins: ['Poppins', 'sans-serif'],
+        outfit: ['var(--font-outfit)', 'sans-serif'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

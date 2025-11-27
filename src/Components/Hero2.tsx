@@ -55,7 +55,7 @@ const Hero2 = () => {
         viewport={{ once: true, margin: "-100px" }}
       >
         <motion.p
-          className="font-trytype text-2xl sm:text-3xl md:text-4xl lg:text-[40px] text-white font-bold leading-tight sm:leading-relaxed md:leading-[3rem] lg:leading-[3.5rem] text-center lg:text-left"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] text-white font-bold leading-tight sm:leading-relaxed md:leading-[3rem] lg:leading-[3.5rem] text-center lg:text-left"
           variants={textVariants}
         >
           Building fast, Responsive, User-centered{" "}
@@ -65,7 +65,7 @@ const Hero2 = () => {
 
         <div className="flex flex-col md:flex-col lg:flex-row justify-between items-center w-full gap-8 md:gap-12 lg:gap-0">
           <motion.div
-            className="text-base sm:text-lg md:text-xl text-[#B1B0B0] font-trytype w-full lg:w-[558px] text-center lg:text-left"
+            className="text-base sm:text-lg md:text-xl text-[#B1B0B0] w-full lg:w-[558px] text-center lg:text-left"
             variants={containerVariants}
           >
             <motion.p variants={paragraphVariants}>
