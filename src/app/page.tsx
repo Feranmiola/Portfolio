@@ -5,12 +5,16 @@ import Hero2 from "@/Components/Hero2";
 import Projects from "@/Components/Projects";
 import Topbar from "@/Components/Topbar";
 import SEO from "@/Components/SEO";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ClipLoader, BeatLoader, SyncLoader } from "react-spinners";
+import { BeatLoader, SyncLoader } from "react-spinners";
+
+// Background fades from pure black to this while scrolling.
+const BG_START = { r: 0, g: 0, b: 0 }; // #000000
+const BG_END = { r: 2, g: 1, b: 38 }; // #020126
 
 export default function Home() {
-  const [bgColor, setBgColor] = useState("#000000");
+  const pageRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showConnecting, setShowConnecting] = useState(false);
 
@@ -37,19 +41,23 @@ export default function Home() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    let scrollTimer = 0;
+    let scrollTimer: ReturnType<typeof setTimeout>;
+    let frame = 0;
 
-    function updateScrollbar() {
-      // Calculate scroll percentage with increased sensitivity
-      const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercentage = Math.min(window.scrollY / (maxScroll * 0.5), 1); // Complete transition at 50% of scroll
+    // Written straight to the DOM instead of through React state: this runs on
+    // every scroll event, and re-rendering the page here restarted the
+    // scroll-in animations of the sections below.
+    function paint() {
+      frame = 0;
 
-      const scrollbarHeight =
-        (window.innerHeight / document.documentElement.scrollHeight) *
-        window.innerHeight;
-      const scrollTop =
-        scrollPercentage * (window.innerHeight - scrollbarHeight);
+      const docHeight = document.documentElement.scrollHeight;
+      const maxScroll = docHeight - window.innerHeight;
+      // Complete the transition at 50% of the scrollable distance.
+      const progress =
+        maxScroll > 0 ? Math.min(window.scrollY / (maxScroll * 0.5), 1) : 0;
+
+      const scrollbarHeight = (window.innerHeight / docHeight) * window.innerHeight;
+      const scrollTop = progress * (window.innerHeight - scrollbarHeight);
 
       document.body.style.setProperty("--scroll-top", `${scrollTop}px`);
       document.body.style.setProperty(
@@ -57,62 +65,36 @@ export default function Home() {
         `${scrollbarHeight}px`
       );
 
-      // Calculate background color based on scroll with more pronounced colors
-      const startColor = "#000000"; // Pure black
-      const endColor = "#020126"; // Target blue
+      // Non-linear interpolation for a more pronounced colour shift.
+      const eased = Math.pow(progress, 0.7);
+      const r = Math.round(BG_START.r + (BG_END.r - BG_START.r) * eased);
+      const g = Math.round(BG_START.g + (BG_END.g - BG_START.g) * eased);
+      const b = Math.round(BG_START.b + (BG_END.b - BG_START.b) * eased);
 
-      // Convert hex to RGB
-      const startRGB = hexToRgb(startColor);
-      const endRGB = hexToRgb(endColor);
-
-      if (startRGB && endRGB) {
-        // Use a non-linear interpolation for more dramatic effect
-        const easedPercentage = Math.pow(scrollPercentage, 0.7); // Adjust power for different curves
-
-        const r = Math.round(
-          startRGB.r + (endRGB.r - startRGB.r) * easedPercentage
-        );
-        const g = Math.round(
-          startRGB.g + (endRGB.g - startRGB.g) * easedPercentage
-        );
-        const b = Math.round(
-          startRGB.b + (endRGB.b - startRGB.b) * easedPercentage
-        );
-
-        const newColor = `#${r.toString(16).padStart(2, "0")}${g
-          .toString(16)
-          .padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
-        setBgColor(newColor);
+      if (pageRef.current) {
+        pageRef.current.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
       }
+    }
+
+    function onScroll() {
+      if (!frame) frame = requestAnimationFrame(paint);
 
       document.body.classList.add("is-scrolling");
-
       clearTimeout(scrollTimer);
-      // @ts-ignore
       scrollTimer = setTimeout(() => {
         document.body.classList.remove("is-scrolling");
       }, 1000);
     }
 
-    // Helper function to convert hex to RGB
-    function hexToRgb(hex: string) {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result
-        ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16),
-          }
-        : null;
-    }
-
-    window.addEventListener("scroll", updateScrollbar);
-    window.addEventListener("resize", updateScrollbar);
-    updateScrollbar();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    paint();
 
     return () => {
-      window.removeEventListener("scroll", updateScrollbar);
-      window.removeEventListener("resize", updateScrollbar);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+      clearTimeout(scrollTimer);
     };
   }, []);
 
@@ -167,8 +149,9 @@ export default function Home() {
       </AnimatePresence>
 
       <div
-        className="flex flex-col w-full min-h-screen transition-colors duration-500"
-        style={{ backgroundColor: bgColor }}
+        ref={pageRef}
+        className="flex flex-col w-full min-h-screen"
+        style={{ backgroundColor: "#000000" }}
       >
         <Topbar />
         <div id="hero">

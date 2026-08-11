@@ -7,6 +7,7 @@ import WhatsappIcon from "./Icons/WhatsappIcon";
 import LinkedinIcon from "./Icons/LinkedinIcon";
 import Xicon from "./Icons/Xicon";
 import Mailicon from "./Icons/Mailicon";
+import AnimatedIcon, { IconMotion } from "./Icons/AnimatedIcon";
 
 const MemoizedLightRay = memo(({ isMobile }: { isMobile: boolean }) => (
   <div
@@ -19,6 +20,129 @@ const MemoizedLightRay = memo(({ isMobile }: { isMobile: boolean }) => (
 ));
 
 MemoizedLightRay.displayName = "MemoizedLightRay";
+
+type IconComponent = React.ComponentType<{
+  width?: number;
+  height?: number;
+  color?: string;
+}>;
+
+interface ContactChannel {
+  label: string;
+  url: string;
+  Icon: IconComponent;
+  hover: IconMotion;
+}
+
+const contactChannels: ContactChannel[] = [
+  {
+    label: "WhatsApp",
+    url: "https://wa.me/2348132402823",
+    Icon: WhatsappIcon,
+    hover: "wiggle",
+  },
+  {
+    label: "LinkedIn",
+    url: "https://www.linkedin.com/in/oluwaferanmi-osunjuyigbe12/",
+    Icon: LinkedinIcon,
+    hover: "float",
+  },
+  {
+    label: "X",
+    url: "https://x.com/feroomeeee",
+    Icon: Xicon,
+    hover: "flip",
+  },
+  {
+    label: "Email",
+    url: "mailto:osunjuyigbeiyin@gmail.com",
+    Icon: Mailicon,
+    hover: "send",
+  },
+];
+
+/**
+ * Circular icon button. The scroll/stagger entry lives on the wrapper and the
+ * hover state on the button itself, so the button can hand its "hover" variant
+ * down to the icon without the two animations fighting over the same values.
+ */
+const ContactButton = ({
+  index,
+  label,
+  padding,
+  onClick,
+  children,
+}: {
+  index: number;
+  label: string;
+  padding: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}) => (
+  <motion.div
+    initial={{ y: 12, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{
+      type: "spring",
+      stiffness: 300,
+      damping: 14,
+      mass: 0.5,
+      delay: index * 0.08,
+    }}
+  >
+    <motion.button
+      type="button"
+      aria-label={label}
+      onClick={onClick}
+      className={`flex items-center justify-center rounded-full cursor-pointer border border-white ${padding} text-white transition-colors duration-200 hover:bg-white hover:text-black`}
+      variants={{ rest: { scale: 1 }, hover: { scale: 1.08 } }}
+      initial="rest"
+      whileHover="hover"
+      whileTap={{ scale: 0.94 }}
+      transition={{ type: "spring", stiffness: 320, damping: 20 }}
+    >
+      {children}
+    </motion.button>
+  </motion.div>
+);
+
+const ContactButtons = ({
+  iconSize,
+  padding,
+  onClose,
+}: {
+  iconSize: number;
+  padding: string;
+  onClose: () => void;
+}) => {
+  const openChannel = useCallback((url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }, []);
+
+  return (
+    <>
+      <ContactButton index={0} label="Back" padding={padding} onClick={onClose}>
+        <AnimatedIcon hover="slideLeft" trigger="parent" entry={false}>
+          <LucideArrowLeft size={iconSize} color="currentColor" />
+        </AnimatedIcon>
+      </ContactButton>
+
+      {contactChannels.map(({ label, url, Icon, hover }, index) => (
+        <ContactButton
+          key={label}
+          index={index + 1}
+          label={label}
+          padding={padding}
+          onClick={() => openChannel(url)}
+        >
+          <AnimatedIcon hover={hover} trigger="parent" entry={false}>
+            <Icon width={iconSize} height={iconSize} color="currentColor" />
+          </AnimatedIcon>
+        </ContactButton>
+      ))}
+    </>
+  );
+};
 
 const TypingText = React.memo(() => {
   const [displayText, setDisplayText] = useState("");
@@ -59,33 +183,11 @@ logic.`;
   );
 });
 
+TypingText.displayName = "TypingText";
+
 const MobileHero = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const iconSize = 24;
-
-  const handleContactClick = (type: string) => {
-    switch (type) {
-      case "whatsapp":
-        window.open("https://wa.me/2348132402823", "_blank");
-        break;
-      case "linkedin":
-        window.open(
-          "https://www.linkedin.com/in/oluwaferanmi-osunjuyigbe12/",
-          "_blank"
-        );
-        break;
-      case "x":
-        window.open("https://x.com/feroomeeee", "_blank");
-        break;
-      case "mail":
-        window.open("mailto:osunjuyigbeiyin@gmail.com", "_blank");
-        break;
-      default:
-        break;
-    }
-    setIsContactOpen(false);
-  };
 
   useEffect(() => {
     // Reset scroll position on mount
@@ -140,7 +242,7 @@ const MobileHero = () => {
           Frontend || Blockchain Developer
         </p>
         <p className="text-[32px] sm:text-[40px] md:text-[48px] leading-tight bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent mb-6">
-          I'm <span className="font-bold">Feranmi Ola</span>
+          I&apos;m <span className="font-bold">Feranmi Ola</span>
         </p>
       </motion.div>
 
@@ -167,62 +269,11 @@ const MobileHero = () => {
             exit={{ opacity: 0, y: -20 }}
             key="contact-open"
           >
-            {[
-              {
-                icon: LucideArrowLeft,
-                onClick: () => setIsContactOpen(false),
-              },
-              {
-                icon: WhatsappIcon,
-                onClick: () => handleContactClick("whatsapp"),
-              },
-              {
-                icon: LinkedinIcon,
-                onClick: () => handleContactClick("linkedin"),
-              },
-              { icon: Xicon, onClick: () => handleContactClick("x") },
-              { icon: Mailicon, onClick: () => handleContactClick("mail") },
-            ].map((item, index) => (
-              <motion.div
-                key={`contact-icon-${index}`}
-                className="rounded-full cursor-pointer border border-white p-3 sm:p-4 hover:bg-white transition-all ease-in-out group"
-                onClick={item.onClick}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{
-                  y: 0,
-                  opacity: 1,
-                  transition: {
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 10,
-                    mass: 0.5,
-                    delay: index * 0.1,
-                  },
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.15 },
-                }}
-                whileTap={{
-                  scale: 0.95,
-                  transition: { duration: 0.1 },
-                }}
-              >
-                <div className="text-white group-hover:text-black transition-colors duration-200">
-                  {index === 0 ? (
-                    <LucideArrowLeft size={20} color="currentColor" />
-                  ) : index === 1 ? (
-                    <WhatsappIcon width={20} height={20} color="currentColor" />
-                  ) : index === 2 ? (
-                    <LinkedinIcon width={20} height={20} color="currentColor" />
-                  ) : index === 3 ? (
-                    <Xicon width={20} height={20} color="currentColor" />
-                  ) : (
-                    <Mailicon width={20} height={20} color="currentColor" />
-                  )}
-                </div>
-              </motion.div>
-            ))}
+            <ContactButtons
+              iconSize={20}
+              padding="p-3 sm:p-4"
+              onClose={() => setIsContactOpen(false)}
+            />
           </motion.div>
         ) : (
           <motion.div
@@ -235,23 +286,28 @@ const MobileHero = () => {
             <motion.a
               href="#projects"
               className="flex flex-row items-center bg-white rounded-[100px] w-full sm:w-[200px] h-[56px] justify-center space-x-2 cursor-pointer px-6"
-              whileHover={{ scale: 1.02 }}
+              variants={{ rest: { scale: 1 }, hover: { scale: 1.02 } }}
+              initial="rest"
+              whileHover="hover"
               whileTap={{ scale: 0.98 }}
             >
               <p className="font-semibold text-[#1E1E1E] text-[16px]">
                 View Projects
               </p>
-              <LucideArrowRight size={20} color="#1E1E1E" />
+              <AnimatedIcon hover="slide" trigger="parent" entry={false}>
+                <LucideArrowRight size={20} color="#1E1E1E" />
+              </AnimatedIcon>
             </motion.a>
 
-            <motion.div
+            <motion.button
+              type="button"
               onClick={() => setIsContactOpen(true)}
               className="w-full sm:w-[200px] h-[56px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[16px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer hover:bg-white hover:text-black px-6"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               Get in Touch 💻
-            </motion.div>
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -262,29 +318,6 @@ const MobileHero = () => {
 const DesktopHero = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const iconSize = 24;
-
-  const handleContactClick = (type: string) => {
-    switch (type) {
-      case "whatsapp":
-        window.open("https://wa.me/2348132402823", "_blank");
-        break;
-      case "linkedin":
-        window.open(
-          "https://www.linkedin.com/in/oluwaferanmi-osunjuyigbe12/",
-          "_blank"
-        );
-        break;
-      case "x":
-        window.open("https://x.com/feroomeeee", "_blank");
-        break;
-      case "mail":
-        window.open("mailto:osunjuyigbeiyin@gmail.com", "_blank");
-        break;
-      default:
-        break;
-    }
-    setIsContactOpen(false);
-  };
 
   return (
     <div className="flex items-center justify-center relative min-h-screen w-full">
@@ -323,121 +356,65 @@ const DesktopHero = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
-        <p className="text-2xl">
-          Frontend || Blockchain Developer
-        </p>
+        <p className="text-2xl">Frontend || Blockchain Developer</p>
         <p className="-skew-x-[5deg] text-[128px] leading-none bg-gradient-to-r from-[#B3B1F3] to-[#ADAAAA] bg-clip-text text-transparent">
-          I'm <span className="font-bold">Feranmi Ola</span>
+          I&apos;m <span className="font-bold">Feranmi Ola</span>
         </p>
       </motion.div>
 
-      {isContactOpen ? (
-        <motion.div
-          className="flex flex-row items-center space-x-5 absolute top-[70rem] h-[64px]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          key="contact-open"
-        >
-          {[
-            { icon: LucideArrowLeft, onClick: () => setIsContactOpen(false) },
-            {
-              icon: WhatsappIcon,
-              onClick: () => handleContactClick("whatsapp"),
-            },
-            {
-              icon: LinkedinIcon,
-              onClick: () => handleContactClick("linkedin"),
-            },
-            { icon: Xicon, onClick: () => handleContactClick("x") },
-            { icon: Mailicon, onClick: () => handleContactClick("mail") },
-          ].map((item, index) => (
-            <motion.div
-              key={`contact-icon-${index}`}
-              className="rounded-full cursor-pointer border border-white p-5 hover:bg-white transition-all ease-in-out group"
-              onClick={item.onClick}
-              initial={{ y: 3, opacity: 0 }}
-              animate={{
-                y: 0,
-                opacity: 1,
-                transition: {
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 10,
-                  mass: 0.5,
-                  delay: index * 0.1,
-                },
-              }}
-              whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.15 },
-              }}
-              whileTap={{
-                scale: 0.95,
-                transition: { duration: 0.1 },
-              }}
-            >
-              <div className="text-white group-hover:text-black transition-colors duration-200">
-                {index === 0 ? (
-                  <LucideArrowLeft size={iconSize} color="currentColor" />
-                ) : index === 1 ? (
-                  <WhatsappIcon
-                    width={iconSize}
-                    height={iconSize}
-                    color="currentColor"
-                  />
-                ) : index === 2 ? (
-                  <LinkedinIcon
-                    width={iconSize}
-                    height={iconSize}
-                    color="currentColor"
-                  />
-                ) : index === 3 ? (
-                  <Xicon
-                    width={iconSize}
-                    height={iconSize}
-                    color="currentColor"
-                  />
-                ) : (
-                  <Mailicon
-                    width={iconSize}
-                    height={iconSize}
-                    color="currentColor"
-                  />
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      ) : (
-        <motion.div
-          className="flex flex-row items-center space-x-5 absolute top-[70rem]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <motion.a
-            href="#projects"
-            className="flex flex-row items-center bg-white rounded-[100px] w-[236px] h-[64px] justify-center space-x-2 cursor-pointer"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <p className="font-semibold text-[#1E1E1E] text-[18px]">
-              View Projects
-            </p>
-            <LucideArrowRight size={iconSize} color="#1E1E1E" />
-          </motion.a>
-
+      <AnimatePresence mode="wait">
+        {isContactOpen ? (
           <motion.div
-            onClick={() => setIsContactOpen(true)}
-            className="w-[221px] h-[64px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer hover:bg-white hover:text-black"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            /* z-50 keeps the row above the light-ray overlay, which otherwise
+               swallows hover/clicks on the left-hand icons. */
+            className="flex flex-row items-center space-x-5 absolute top-[70rem] h-[64px] z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            key="contact-open"
           >
-            Get in Touch 💻
+            <ContactButtons
+              iconSize={iconSize}
+              padding="p-5"
+              onClose={() => setIsContactOpen(false)}
+            />
           </motion.div>
-        </motion.div>
-      )}
+        ) : (
+          <motion.div
+            className="flex flex-row items-center space-x-5 absolute top-[70rem] z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            key="contact-closed"
+          >
+            <motion.a
+              href="#projects"
+              className="flex flex-row items-center bg-white rounded-[100px] w-[236px] h-[64px] justify-center space-x-2 cursor-pointer"
+              variants={{ rest: { scale: 1 }, hover: { scale: 1.02 } }}
+              initial="rest"
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+            >
+              <p className="font-semibold text-[#1E1E1E] text-[18px]">
+                View Projects
+              </p>
+              <AnimatedIcon hover="slide" trigger="parent" entry={false}>
+                <LucideArrowRight size={iconSize} color="#1E1E1E" />
+              </AnimatedIcon>
+            </motion.a>
+
+            <motion.button
+              type="button"
+              onClick={() => setIsContactOpen(true)}
+              className="w-[221px] h-[64px] flex items-center justify-center flex-row space-x-2 border border-white rounded-[100px] text-[18px] font-semibold bg-transparent text-white transition-all ease-in-out cursor-pointer hover:bg-white hover:text-black"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Get in Touch 💻
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

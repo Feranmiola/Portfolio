@@ -1,11 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import Icon from "./Icons/Icon";
 
 const Topbar = () => {
   const { scrollY } = useScroll();
-  const [isScrolled, setIsScrolled] = useState(false);
 
   // Spring animation for smoother transitions
   const springConfig = { stiffness: 100, damping: 20, mass: 0.5 };
@@ -16,14 +15,6 @@ const Topbar = () => {
   const fullNameOpacity = useTransform(spring, [200, 400], [1, 0]);
   const initialsY = useTransform(spring, [200, 400], [50, 0]);
   const initialsOpacity = useTransform(spring, [200, 400], [0, 1]);
-
-  useEffect(() => {
-    const unsubscribe = scrollY.onChange((latest) => {
-      setIsScrolled(latest > 500);
-    });
-
-    return () => unsubscribe();
-  }, [scrollY]);
 
   return (
     <div className="flex items-center justify-between flex-row fixed w-full py-10 lg:px-20 z-[9999] md:px-10 max-md:px-5">
