@@ -14,10 +14,10 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-[1440px] px-5 pb-24 pt-16 md:px-8 md:pb-32 md:pt-24">
         <Reveal y={12}>
-          <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-400 sm:gap-x-3 sm:text-xs sm:tracking-[0.2em]">
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-400 xs:gap-x-2.5 xs:text-[11px] xs:tracking-[0.16em] sm:gap-x-3 sm:text-xs sm:tracking-[0.2em]">
             <span className="text-ink-600">{"//"}</span>
             {heroAreas.map((area, i) => (
-              <span key={area} className="flex items-center gap-3">
+              <span key={area} className="flex items-center gap-2 xs:gap-2.5 sm:gap-3">
                 {i > 0 && (
                   <span aria-hidden className="text-ink-600">
                     ·

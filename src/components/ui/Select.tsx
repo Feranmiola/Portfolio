@@ -34,7 +34,13 @@ export function Select({
   const [active, setActive] = useState(-1);
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const listId = useId();
+
+  // Inside a scrolling sheet the list can open below the fold.
+  useEffect(() => {
+    if (open) listRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [open]);
 
   // Close when pressing anywhere else.
   useEffect(() => {
@@ -132,6 +138,7 @@ export function Select({
       <AnimatePresence>
         {open && (
           <motion.ul
+            ref={listRef}
             id={listId}
             role="listbox"
             className="absolute inset-x-0 top-[calc(100%+6px)] z-20 rounded-[6px] border border-ink-700 bg-ink-950 p-1 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.9)]"

@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
 
+/* Wide and tall enough for the project cards to pin and stack. */
+@custom-variant stack (@media (min-width: 64rem) and (min-height: 44rem));
+
 /* ------------------------------------------------------------------ */
 /*  Design tokens: lime on near-black, with a faint green cast.        */
 /* ------------------------------------------------------------------ */

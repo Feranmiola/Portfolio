@@ -14,12 +14,16 @@ import type { Project } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { ArrowUpRight } from "@/components/ui/Icons";
 
+/** Must match the `stack` variant in globals.css. */
+const STACK_QUERY = "(min-width: 64rem) and (min-height: 44rem)";
+
 const pad = (n: number) => String(n).padStart(2, "0");
 const hostname = (url: string) => new URL(url).hostname.replace(/^www\./, "");
 
 /**
- * Project cards that pin and pile up as you scroll (from md up). Each card
- * shrinks and dims a little as the ones after it slide over the top.
+ * Project cards. On viewports wide and tall enough (the `stack` variant) they
+ * pin and pile up as you scroll, each shrinking and dimming a little as the
+ * next slides over it. Everywhere else they simply flow down the page.
  */
 export function WorkStack({ projects }: { projects: Project[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,7 +35,10 @@ export function WorkStack({ projects }: { projects: Project[] }) {
   });
 
   return (
-    <div ref={containerRef} className="relative mt-16 space-y-6 md:mt-6 md:space-y-0">
+    <div
+      ref={containerRef}
+      className="relative mt-14 space-y-6 md:space-y-8 stack:mt-6 stack:space-y-0"
+    >
       {projects.map((project, i) => (
         <ProjectCard
           key={project.slug}
@@ -46,11 +53,10 @@ export function WorkStack({ projects }: { projects: Project[] }) {
   );
 }
 
-/** True from the md breakpoint up, where the cards pin and stack. */
 function useStacking() {
   const [stacking, setStacking] = useState(false);
   useEffect(() => {
-    const query = window.matchMedia("(min-width: 48rem)");
+    const query = window.matchMedia(STACK_QUERY);
     const update = () => setStacking(query.matches);
     update();
     query.addEventListener("change", update);
@@ -78,13 +84,17 @@ function ProjectCard({
   const shade = useTransform(progress, range, [0, depth * 0.14]);
 
   return (
-    <div className="md:sticky md:top-0 md:flex md:h-svh md:items-center md:pt-16">
+    <div className="stack:sticky stack:top-0 stack:flex stack:h-svh stack:items-center stack:pt-16">
       <motion.article
         style={{ scale: animate ? scale : 1, "--stack-offset": `${index * 18}px` } as MotionStyle}
-        className="group relative grid w-full origin-top overflow-hidden rounded-[18px] border border-ink-700 bg-ink-900 transition-colors duration-500 hover:border-lime/40 md:top-[var(--stack-offset)] md:h-[min(640px,calc(100svh-8rem))] md:grid-cols-12"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="group relative grid w-full origin-top overflow-hidden rounded-[18px] border border-ink-700 bg-ink-900 transition-colors duration-500 hover:border-lime/40 lg:grid-cols-12 stack:top-[var(--stack-offset)] stack:h-[min(640px,calc(100svh-8rem))]"
       >
         {/* Copy */}
-        <div className="relative z-10 flex flex-col p-6 sm:p-8 md:col-span-5 md:p-10">
+        <div className="relative z-10 flex flex-col p-6 sm:p-8 lg:col-span-6 xl:col-span-5 xl:p-10">
           <p className="flex items-baseline gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-500">
             <span className="font-dot-round text-5xl font-black leading-none tracking-normal text-lime">
               {pad(index + 1)}
@@ -92,24 +102,27 @@ function ProjectCard({
             <span>/ {pad(total)}</span>
           </p>
 
-          <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-400 md:mt-auto md:pt-8">
+          <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-400 lg:mt-auto lg:pt-8">
             {project.category}
           </p>
           <h3 className="mt-3 text-[clamp(2.4rem,4.8vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-paper">
             {project.title}
           </h3>
-          <p className="mt-5 max-w-md leading-relaxed text-ink-400">{project.description}</p>
+          <p className="mt-5 max-w-xl leading-relaxed text-ink-400 lg:max-w-md">
+            {project.description}
+          </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-ink-800 pt-5">
+            {/* Separators sit after each tag, so a wrapped line never starts with one. */}
             <ul className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.15em] text-ink-400">
               {project.tags.map((tag, i) => (
-                <li key={tag} className="flex gap-3">
-                  {i > 0 && (
+                <li key={tag} className="flex gap-3 whitespace-nowrap">
+                  {tag}
+                  {i < project.tags.length - 1 && (
                     <span aria-hidden className="text-ink-600">
                       ·
                     </span>
                   )}
-                  {tag}
                 </li>
               ))}
             </ul>
@@ -135,10 +148,10 @@ function ProjectCard({
         </div>
 
         {/* Screenshot in a browser frame, running off the card's corner */}
-        <div className="relative aspect-[4/3] sm:aspect-[16/9] md:col-span-7 md:aspect-auto">
+        <div className="relative aspect-[4/3] sm:aspect-[16/9] lg:col-span-6 lg:aspect-auto lg:min-h-[26rem] xl:col-span-7">
           <Frame
             project={project}
-            className="absolute inset-x-5 -bottom-8 top-0 transition-transform duration-700 ease-out group-hover:-translate-y-2 md:-bottom-12 md:-right-12 md:left-0 md:top-10 md:group-hover:-translate-x-3 md:group-hover:-translate-y-3"
+            className="absolute inset-x-5 -bottom-8 top-0 transition-transform duration-700 ease-out group-hover:-translate-y-2 sm:inset-x-8 lg:-bottom-12 lg:-right-12 lg:left-0 lg:top-10 lg:group-hover:-translate-x-3 lg:group-hover:-translate-y-3"
           />
         </div>
 
@@ -174,7 +187,7 @@ function Frame({ project, className }: { project: Project; className?: string })
           src={project.image}
           alt={`${project.title} screenshot`}
           fill
-          sizes="(min-width: 768px) 60vw, 100vw"
+          sizes="(min-width: 1024px) 60vw, 100vw"
           className="object-cover object-top"
         />
       </div>
