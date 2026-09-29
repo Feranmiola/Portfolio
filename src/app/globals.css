@@ -1,94 +1,268 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* ------------------------------------------------------------------ */
+/*  Design tokens: lime on near-black, with a faint green cast.        */
+/* ------------------------------------------------------------------ */
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@theme {
+  --color-ink-950: #080907;
+  --color-ink-900: #0d0f0b;
+  --color-ink-850: #121510;
+  --color-ink-800: #1a1d16;
+  --color-ink-700: #262a20;
+  --color-ink-600: #3a4031;
+  --color-ink-500: #5c6453;
+  --color-ink-400: #8b9282;
+  --color-ink-300: #b5bbac;
+  --color-paper: #eef1e6;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  --color-lime: #c8f53c;
+  --color-lime-hi: #dcff78;
+  --color-lime-lo: #93b814;
+  --color-lime-ink: #0b0d05;
+
+  /* The one off-palette colour: form errors need to read as errors. */
+  --color-alert: #ff7a66;
+
+  --breakpoint-xs: 26rem;
+
+  --animate-blink: blink 1s steps(1, end) infinite;
+  --animate-ping-slow: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, #000000, #020126);
-  min-height: 100vh;
+/* Font variables come from next/font on <html>, so inline them. */
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-dot: var(--font-doto), var(--font-geist-mono), monospace;
 }
 
-/* Custom text selection styles */
-::selection {
-  background: rgba(179, 177, 243, 0.3);
-  /* Light purple with transparency */
-  color: white;
-}
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
 
-::-moz-selection {
-  background: rgba(179, 177, 243, 0.3);
-  /* For Firefox */
-  color: white;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-html {
-  @apply scroll-smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  scroll-behavior: smooth;
-}
-
-@media screen and (min-width: 1024px) {
+@layer base {
   html {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  html::-webkit-scrollbar {
-    display: none;
+    color-scheme: dark;
+    background: var(--color-ink-950);
+    scrollbar-color: var(--color-ink-600) var(--color-ink-950);
+    scrollbar-width: thin;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    position: relative;
+    background: var(--color-ink-950);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
   }
 
-  body::after {
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-lime-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Leave room for the fixed header when jumping to a section. */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Utilities                                                          */
+/* ------------------------------------------------------------------ */
+
+/* Film grain over everything. A static texture, so it costs one paint. */
+@utility grain {
+  &::after {
     content: "";
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 4px;
-    height: 100%;
-    background: transparent;
-    z-index: 9999;
+    inset: 0;
+    z-index: 100;
     pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+}
 
-  body::after {
-    background: #ffffff;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-  }
+/* The dot matrix face with round LEDs instead of square pixels. */
+@utility font-dot-round {
+  font-family: var(--font-dot);
+  font-variation-settings: "ROND" 100;
+}
 
-  body.is-scrolling::after {
-    opacity: 1;
-  }
+/* Faint design-canvas grid. */
+@utility bg-canvas-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
 
-  body::after {
-    top: var(--scroll-top, 0px);
-    height: var(--scrollbar-height, 20%);
+/* ------------------------------------------------------------------ */
+/*  Custom cursor: a dot on the pointer and a ring trailing it.        */
+/*  Only active once JS confirms a mouse (see components/ui/Cursor).   */
+/* ------------------------------------------------------------------ */
+
+html[data-cursor-mode="custom"],
+html[data-cursor-mode="custom"] * {
+  cursor: none !important;
+}
+
+/* Text fields keep the native I-beam; the custom cursor hides over them. */
+html[data-cursor-mode="custom"] :is(input, textarea, select, [contenteditable="true"]) {
+  cursor: auto !important;
+}
+
+.cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  pointer-events: none;
+}
+
+html[data-cursor-mode="custom"] .cursor {
+  display: block;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.2s;
+}
+
+.cursor-dot > span,
+.cursor-ring > span {
+  display: grid;
+  place-items: center;
+  border-radius: 9999px;
+  translate: -50% -50%;
+}
+
+.cursor-dot > span {
+  width: 6px;
+  height: 6px;
+  background: var(--color-lime);
+  transition: opacity 0.2s;
+}
+
+.cursor-ring > span {
+  --size: 34px;
+  width: var(--size);
+  height: var(--size);
+  border: 1px solid color-mix(in srgb, var(--color-lime) 55%, transparent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lime-ink);
+  transition:
+    width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.2s,
+    background-color 0.3s,
+    border-color 0.3s,
+    opacity 0.2s;
+}
+
+.cursor-ring > span > em {
+  font-style: normal;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cursor-ring[data-state="hover"] > span {
+  --size: 52px;
+  border-color: var(--color-lime);
+  background: color-mix(in srgb, var(--color-lime) 14%, transparent);
+}
+
+.cursor-ring[data-state="label"] > span {
+  --size: 84px;
+  border-color: var(--color-lime);
+  background: var(--color-lime);
+}
+
+.cursor-ring[data-state="label"] > span > em {
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+.cursor-ring[data-pressed] > span {
+  transform: scale(0.85);
+}
+
+.cursor-dot[data-state="label"] > span,
+.cursor-dot[data-state="native"] > span,
+.cursor-ring[data-state="native"] > span {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Rest every CSS animation on its base styles rather than an end frame. */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Footer wordmark: a dark LED board whose dots light up under the    */
+/*  pointer (layout/FooterName sets --x/--y and data-lit).             */
+/* ------------------------------------------------------------------ */
+
+@property --spot {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+.footer-name {
+  --x: 50%;
+  --y: 50%;
+  --spot: 0px;
+  color: transparent;
+  background-image: radial-gradient(
+    circle at var(--x) var(--y),
+    var(--color-lime) 0,
+    var(--color-lime) calc(var(--spot) * 0.45),
+    var(--color-ink-850) var(--spot)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: --spot 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-name[data-lit] {
+  --spot: 190px;
 }

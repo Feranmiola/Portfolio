@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# feranmiola.com
 
-## Getting Started
+Portfolio of Feranmi Ola: frontend, blockchain and Roblox developer.
 
-First, run the development server:
+Next.js 16 (App Router), React 19, Tailwind CSS 4, Motion and Lenis.
+
+## Develop
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. `npm run typecheck` runs the TypeScript compiler; `npm run build` produces the production bundle.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing content
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+All copy and data (projects, services, stack, socials, hero lines) live in
+[`src/lib/content.ts`](src/lib/content.ts). Layout code never hardcodes text,
+so that file is the only place to update when the portfolio changes.
 
-## Learn More
+Project screenshots and the portrait are hosted on Cloudinary; the allowed host
+is set in [`next.config.mjs`](next.config.mjs).
 
-To learn more about Next.js, take a look at the following resources:
+## Contact form
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+"Start a project" opens a form handled by a server action
+([`src/app/actions/contact.ts`](src/app/actions/contact.ts)). It validates the
+submission, drops honeypot hits and throttles by IP, then delivers it.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Quickest setup (free, no account): [Web3Forms](https://web3forms.com) emails
+every submission to your inbox, with the sender as reply-to.
 
-## Deploy on Vercel
+1. Enter your email on web3forms.com and copy the access key they send you.
+2. `cp .env.example .env.local` and set `WEB3FORMS_ACCESS_KEY`.
+3. Add the same variable to your host (Vercel → Settings → Environment Variables).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Alternatively set `CONTACT_WEBHOOK_URL` to POST the raw JSON to a Make/n8n
+webhook, a Discord webhook, or your own API. If nothing is configured or
+delivery fails, visitors get a prefilled `mailto:` draft so nothing typed is lost.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Structure
+
+```
+src/app            layout, page, 404, sitemap, robots, server actions
+src/components
+  hero/            dot field, name frame, typewriter, interactive terminal
+  sections/        Hero, Work (+WorkStack), Services, Contact
+  contact/         form provider, dialog, "Start a project" button
+  layout/          Header, Footer
+  ui/              buttons, icons, cursor, reveal animations, misc
+  providers/       Lenis smooth scroll + reduced-motion config
+src/lib            content.ts (all copy), cn.ts
+```

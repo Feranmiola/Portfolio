@@ -1,35 +1,14 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { site } from "@/lib/content";
 
+// A single-page site: hash fragments aren't separate URLs, so list the page once.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://feranmiola.com'
-  
-  // Get current date in ISO format
-  const currentDate = new Date().toISOString()
-  
   return [
     {
-      url: baseUrl,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
+      url: site.url,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
       priority: 1,
     },
-    {
-      url: `${baseUrl}/#projects`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#about`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ]
-} 
+  ];
+}
