@@ -2,79 +2,83 @@
 
 import { headers } from "next/headers";
 import { inquiry, site } from "@/lib/content";
-
-type Field = "name" | "email" | "type" | "message";
-type Inquiry = Record<Field, string>;
+import {
+  inspectShape,
+  vetInquiry,
+  type Inquiry,
+  type InquiryField,
+} from "@/lib/inquiry-guard";
 
 export type InquiryState = {
   status: "idle" | "sent" | "invalid" | "failed";
-  errors?: Partial<Record<Field, string>>;
+  errors?: Partial<Record<InquiryField, string>>;
   /** Prefilled mail link, so nothing is lost when delivery fails. */
   mailto?: string;
 };
 
-const LIMITS: Record<Field, number> = {
-  name: 80,
-  email: 120,
-  type: 40,
-  message: 2000,
-};
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+/*
+ * Best-effort throttle per IP. Lives in memory, so it resets with the
+ * instance. Every attempt counts once; one that looked hostile counts for
+ * more, so probing locks itself out quickly.
+ */
+const WINDOW = 10 * 60_000;
+const MAX_ATTEMPTS = 8;
+const HOSTILE_COST = 4;
+const attempts = new Map<string, number[]>();
 
-// Best-effort throttle per IP. Lives in memory, so it resets with the instance.
-const recent = new Map<string, number[]>();
-function throttled(ip: string) {
+function record(ip: string, cost = 1) {
   const now = Date.now();
-  const hits = (recent.get(ip) ?? []).filter((t) => now - t < 10 * 60_000);
-  hits.push(now);
-  if (recent.size > 5000) recent.clear();
-  recent.set(ip, hits);
-  return hits.length > 5;
+  const hits = (attempts.get(ip) ?? []).filter((t) => now - t < WINDOW);
+  for (let i = 0; i < cost; i++) hits.push(now);
+  if (attempts.size > 5000) attempts.clear();
+  attempts.set(ip, hits);
+  return hits.length > MAX_ATTEMPTS;
 }
 
 /**
- * Handles the "Start a project" form. Validates, then delivers the inquiry:
- * Web3Forms emails it to the inbox its access key belongs to, or a generic
- * webhook gets the raw JSON. When neither is possible the visitor gets a
- * mailto: draft instead.
+ * Handles the "Start a project" form: checks the shape of the request, cleans
+ * and validates the text (see lib/inquiry-guard), then delivers it. Web3Forms
+ * emails it to the inbox its access key belongs to, or a generic webhook gets
+ * the raw JSON. When neither is possible the visitor gets a mailto: draft.
  */
 export async function sendInquiry(formData: FormData): Promise<InquiryState> {
   // Honeypot: people never see this field, so anything in it is a bot.
   if (formData.get("website")) return { status: "sent" };
 
-  const read = (field: Field) =>
-    String(formData.get(field) ?? "")
-      .trim()
-      .slice(0, LIMITS[field] + 1);
-  const data: Inquiry = {
-    name: read("name"),
-    email: read("email"),
-    type: read("type"),
-    message: read("message"),
+  const requestHeaders = await headers();
+  const ip =
+    requestHeaders.get("x-real-ip") ||
+    requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown";
+
+  const block = (reason: string, errors: InquiryState["errors"]): InquiryState => {
+    // The reason only: payloads never go into the logs.
+    console.warn(`[contact] blocked (${reason}) from ${ip}`);
+    record(ip, HOSTILE_COST);
+    return { status: "invalid", errors };
   };
 
-  const errors: InquiryState["errors"] = {};
-  if (!data.name) errors.name = "Tell me who you are.";
-  else if (data.name.length > LIMITS.name) errors.name = "Keep your name under 80 characters.";
-  if (!EMAIL.test(data.email) || data.email.length > LIMITS.email) {
-    errors.email = "Enter an email I can reply to.";
-  }
-  if (!inquiry.types.includes(data.type)) errors.type = "Pick what you're building.";
-  if (data.message.length < 20) {
-    errors.message = "Give me a little more to go on (20+ characters).";
-  } else if (data.message.length > LIMITS.message) {
-    errors.message = "Keep it under 2,000 characters.";
-  }
-  if (Object.keys(errors).length) return { status: "invalid", errors };
+  const shape = inspectShape(formData.entries());
+  if (shape) return block(shape.reason, { message: shape.message });
 
+  const field = (name: InquiryField) => String(formData.get(name) ?? "");
+  const verdict = vetInquiry(
+    { name: field("name"), email: field("email"), type: field("type"), message: field("message") },
+    inquiry.types
+  );
+  if (!verdict.ok) {
+    if (verdict.blocked) return block(verdict.blocked, verdict.errors);
+    record(ip);
+    return { status: "invalid", errors: verdict.errors };
+  }
+
+  const data = verdict.data;
   const subject = `Project inquiry: ${data.type}`;
   const mailto = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
     `Hi Feranmi,\n\n${data.message}\n\n— ${data.name}\n${data.email}`
   )}`;
 
-  const ip =
-    (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (throttled(ip)) return { status: "failed", mailto };
+  if (record(ip)) return { status: "failed", mailto };
 
   const delivery = pickDelivery(data, subject);
   if (!delivery) {
@@ -134,6 +138,8 @@ function pickDelivery(data: Inquiry, subject: string) {
         ...data,
         // `content` is what Discord-style webhooks render; others ignore it.
         content: `${subject}\nFrom: ${data.name} <${data.email}>\n\n${data.message}`,
+        // Stops "@everyone" in a message from pinging a Discord channel.
+        allowed_mentions: { parse: [] },
         source: site.url,
         receivedAt: new Date().toISOString(),
       },

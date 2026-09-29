@@ -167,7 +167,12 @@ export function ContactDialog({
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     startTransition(async () => {
-      setState(await sendInquiry(data));
+      try {
+        setState(await sendInquiry(data));
+      } catch {
+        // Offline, or the server refused the request outright (oversized, say).
+        setState({ status: "failed" });
+      }
     });
   };
 
@@ -365,13 +370,28 @@ export function ContactDialog({
                             className="rounded-[6px] border border-ink-700 bg-ink-950 p-4 text-sm leading-relaxed text-ink-300"
                           >
                             Couldn&apos;t send that just now.{" "}
-                            <a
-                              href={state.mailto}
-                              className="text-lime underline decoration-lime/40 underline-offset-4 hover:decoration-lime"
-                            >
-                              Open it in your mail app instead
-                            </a>
-                            ; everything you typed is already in the draft.
+                            {state.mailto ? (
+                              <>
+                                <a
+                                  href={state.mailto}
+                                  className="text-lime underline decoration-lime/40 underline-offset-4 hover:decoration-lime"
+                                >
+                                  Open it in your mail app instead
+                                </a>
+                                ; everything you typed is already in the draft.
+                              </>
+                            ) : (
+                              <>
+                                Email me directly at{" "}
+                                <a
+                                  href={`mailto:${site.email}`}
+                                  className="text-lime underline decoration-lime/40 underline-offset-4 hover:decoration-lime"
+                                >
+                                  {site.email}
+                                </a>
+                                .
+                              </>
+                            )}
                           </p>
                         )}
                       </div>

@@ -39,6 +39,28 @@ Alternatively set `CONTACT_WEBHOOK_URL` to POST the raw JSON to a Make/n8n
 webhook, a Discord webhook, or your own API. If nothing is configured or
 delivery fails, visitors get a prefilled `mailto:` draft so nothing typed is lost.
 
+## Security
+
+The form has no file input and the site has no database, so what matters is
+what reaches the inbox. Everything is enforced on the server, in
+[`src/lib/inquiry-guard.ts`](src/lib/inquiry-guard.ts):
+
+- **Shape**: a request may carry the four text fields (plus the honeypot) and
+  nothing else. Files, extra fields and duplicates are refused.
+- **Size**: server action bodies are capped at 32 KB.
+- **Cleaning**: control characters, zero-width characters and bidi overrides
+  are stripped; single-line fields lose their line breaks.
+- **Attack signatures**: markup and script URLs, mail headers, MIME parts,
+  data URIs and encoded blobs, SQL, shell and template-injection payloads are
+  rejected with a plain-text-only message. Ordinary prose ("select products
+  from a catalogue", "budget < 5000") passes.
+- **Throttling**: eight attempts per IP per ten minutes; a hostile attempt
+  counts as four.
+
+Responses also carry a Content-Security-Policy and the usual hardening headers
+(see [`next.config.mjs`](next.config.mjs)). If you add an external script,
+font, image host or analytics later, it has to be allowed there first.
+
 ## Structure
 
 ```
@@ -50,5 +72,5 @@ src/components
   layout/          Header, Footer
   ui/              buttons, icons, cursor, reveal animations, misc
   providers/       Lenis smooth scroll + reduced-motion config
-src/lib            content.ts (all copy), cn.ts
+src/lib            content.ts (all copy), inquiry-guard.ts (form hygiene), cn.ts
 ```
